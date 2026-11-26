@@ -2,6 +2,9 @@
 
 Referência visual: `prototipo/<arquivo>.html`. Textos entre colchetes ([Evento A], [R$]) são exemplos.
 
+**Carregando (todas as telas internas):** enquanto os dados chegam, a tela mostra um *skeleton screen* — blocos cinza
+pulsando no formato da tela (menu, cabeçalho, indicadores, tabelas/cartões), em vez de “Carregando…”.
+
 ## 1. Login
 Arquivo do protótipo: `prototipo/index.html`
 
@@ -34,7 +37,8 @@ Arquivo do protótipo: `prototipo/Main.html`
 
 **Blocos:**
 - **Saudação e frase do dia:** “[Usuário] · [dia da semana, data]”, frase sorteada da lista de frases da empresa e botão “+ Novo evento”.
-- **Indicadores:** Eventos ativos e Pagamentos nos próximos 7 dias.
+  Gestor e planejamento veem “✎ Frases do dia”, que abre uma janela para incluir, editar, ligar/desligar (sai do sorteio sem apagar) e apagar frases; grava na hora.
+- **Indicadores:** Eventos ativos · Eventos esta semana (seg a dom, com os nomes) · Pontos de atenção (total, quantos atrasados/indeferidos; clica e desce até a lista).
 - **Minhas tarefas no Asana:** Três cartões: Tarefas para hoje (com quantas já concluídas), Tarefas atrasadas (a mais antiga há N dias) e Na sua fila (em aberto atribuídas à pessoa). Mostra “Sincronizado há N min” e o botão “Abrir no Asana”.
 - **Próximos eventos:** Tabela Evento · Data · Faltam (D-x) · Status · Pagamento · “Entrar no evento →”.
 - **Pontos de atenção:** Selos coloridos: Atrasado, Vence em 5d, Sem NF, Hoje, cada um com o item e o evento.
@@ -44,9 +48,10 @@ Arquivo do protótipo: `prototipo/Main.html`
 **Regras:**
 - A lista mostra só os eventos que a pessoa pode ver (equipe) ou todos, para gestor/planejamento.
 - As tarefas vêm do Asana por uma função no servidor; o token nunca chega ao navegador.
-- “+ Novo evento” só aparece para gestor e planejamento.
+- “+ Novo evento” e “✎ Frases do dia” só aparecem para gestor e planejamento.
+- Pontos de atenção de documentos só contam eventos com a tela Documentação ligada.
 
-**Dados:** `eventos, frases_do_dia, usuario_integracoes, documentos, cronograma`
+**Dados:** `eventos, frases_do_dia, usuario_integracoes, documentos, evento_modulos, v_cronograma`
 
 **Quem pode:** Todos os usuários.
 
@@ -63,7 +68,8 @@ Arquivo do protótipo: `prototipo/Eventos.html`
 **Blocos:**
 - **Topo:** Título e botão “+ Novo evento”.
 - **Filtros:** Busca por texto, status (Todos, Planejamento, Montagem, Operação, Encerrado) e período (Próximos, Este mês, Passados).
-- **Cartões de evento:** Nome, selo de status, data · local, cidade · D-x, “Pago R$ de R$” e alertas (docs pendentes, parcela atrasada, NFs faltando, Docs em dia).
+- **Cartões de evento:** Nome, selo de status, data · local, cidade · D-x e alertas de documentos (pendentes, atrasados, indeferidos, Docs em dia).
+  Gestor e planejamento veem “🗑 Excluir” no cartão (mesma confirmação da Visão geral).
 
 **Regras:**
 - Cada pessoa vê só os eventos em que está na equipe; gestor e planejamento veem todos.
@@ -74,8 +80,7 @@ Arquivo do protótipo: `prototipo/Eventos.html`
 **Quem pode:** Todos (cada um vê os seus eventos).
 
 **Pendências:**
-- O filtro de status não tem Desmontagem e Cancelado, que existem no banco.
-- “Pago R$ de R$” e os alertas de parcela e NF dependem de pagamentos.
+- Nenhuma (filtro com os 6 status feito; pagamentos fora do MVP).
 
 ## 4. Evento · Visão geral
 Arquivo do protótipo: `prototipo/EventoGeral.html`
@@ -107,6 +112,9 @@ Arquivo do protótipo: `prototipo/EventoGeral.html`
 - “Próximos 3 dias” = hoje até hoje+2: cronograma por fase + marcos (prazos de documento, passagem de som, show).
 - “+ Adicionar” e “×” da equipe só para gestor/planejamento, até a pendência 9 (permissões) ser decidida; o banco ainda deixa membros.
 - “Editar evento” aparece desabilitado até a tela ser desenhada.
+- **Excluir** (só gestor e planejamento): janela que lista o que será apagado (itens da planilha, documentos, cronograma,
+  setores, atrações, conferências, anexos, movimentos de estoque, equipe) e pede para digitar o nome do evento.
+  Apaga tudo do evento; o histórico de alterações é mantido. Não dá para desfazer.
 
 **Pendências:**
 - Tela Editar evento (dados + checklist de telas).

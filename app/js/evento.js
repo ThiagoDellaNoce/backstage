@@ -4,6 +4,7 @@ import { exigirLogin } from './auth.js';
 import { montarLayout, abasDoEvento } from './layout.js';
 import { hoje, somarDias } from './util.js';
 import { desenharEvento } from './evento-view.js';
+import { excluirEvento } from './excluir-evento.js';
 
 const usuario = await exigirLogin();
 let main = montarLayout(usuario, 'eventos');
@@ -66,6 +67,7 @@ try {
   } else {
     document.title = `Backstage · ${dados.evento.nome}`;
     main = montarLayout(usuario, 'eventos', { evento: dados.evento, abas: dados.abas, aba: 'visao_geral' });
+    acoes.excluir = async () => { if (await excluirEvento(dados.evento)) location.href = 'eventos.html'; };
     desenharEvento(main, usuario, dados, acoes);
   }
 } catch (e) {

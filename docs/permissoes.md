@@ -16,7 +16,7 @@ Legenda: **Total** = em todos os eventos e cadastros da empresa · **Equipe** = 
 | Ver a lista de eventos | Total | Total | Equipe | Equipe | Equipe | Equipe | Equipe | `eventos` |
 | Criar evento | Total | Total | Não | Não | Não | Não | Não | `eventos` |
 | Editar dados e status do evento ⚠ | Total | Total | Equipe | Equipe | Equipe | Equipe | Equipe | `eventos` |
-| Excluir evento (apaga tudo do evento) | Total | Total | Não | Não | Não | Não | Não | `eventos` |
+| Excluir evento (apaga tudo do evento, inclusive movimentos de estoque; histórico mantido) | Total | Total | Não | Não | Não | Não | Não | `eventos` |
 | Ligar e desligar telas do evento (checklist) | Total | Total | Ver na equipe | Ver na equipe | Ver na equipe | Ver na equipe | Ver na equipe | `evento_modulos` |
 | Adicionar e remover pessoas da equipe ⚠ | Total | Total | Equipe | Equipe | Equipe | Equipe | Equipe | `evento_equipe` |
 | Criar e ordenar setores | Total | Total | Equipe | Equipe | Equipe | Equipe | Equipe | `setores` |
@@ -35,7 +35,7 @@ Legenda: **Total** = em todos os eventos e cadastros da empresa · **Equipe** = 
 | Catálogo de itens e categorias ⚠ | Total | Total | Ler | Ler | Ler | Ler | Ler | `catalogo_itens · categorias` |
 | Hotéis | Total | Total | Ler | Ler | Ler | Ler | Ler | `hoteis` |
 | Tipos de documento, modelos de evento ⚠ | Total | Total | Ler | Ler | Ler | Ler | Ler | `tipos_documento · modelos_evento · modelo_modulos` |
-| Parâmetros de dimensionamento e frases do dia | Total | Total | Ler | Ler | Ler | Ler | Ler | `parametros_dimensionamento · frases_do_dia` |
+| Parâmetros de dimensionamento e frases do dia (frases: pelo Painel) | Total | Total | Ler | Ler | Ler | Ler | Ler | `parametros_dimensionamento · frases_do_dia` |
 | **Estoque** | | | | | | | | |
 | Consultar estoque | Total | Total | Ler | Ler | Ler | Ler | Ler | `estoque_itens` |
 | Cadastrar e editar materiais | Total | Total | Não | Não | Não | Não | Não | `estoque_itens` |

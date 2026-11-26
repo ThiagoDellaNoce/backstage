@@ -52,13 +52,32 @@ export function pontosDeAtencao({ eventos, documentos, cronogramaHoje }, h = hoj
   return pontos.sort((a, b) => a.ordem - b.ordem);
 }
 
-export function desenharPainel(main, usuario, dados, h = hoje()) {
+/** Segunda e domingo da semana de `h`. */
+export function semana(h = hoje()) {
+  const dow = new Date(h + 'T12:00').getDay(); // 0 = domingo
+  const seg = somarDias(h, dow === 0 ? -6 : 1 - dow);
+  return { inicio: seg, fim: somarDias(seg, 6) };
+}
+
+/** Eventos ativos que acontecem (ao menos um dia) nesta semana. */
+export function eventosDaSemana(eventos, h = hoje()) {
+  const { inicio, fim } = semana(h);
+  return eventos.filter((e) => ATIVOS.includes(e.status) && e.data_evento <= fim && (e.data_fim || e.data_evento) >= inicio);
+}
+
+/**
+ * @param acoes { editarFrases(): Promise<frasesAtivas> } — só usado por gestor/planejamento
+ */
+export function desenharPainel(main, usuario, dados, h = hoje(), acoes = {}) {
   const { eventos, frases } = dados;
   const ativos = eventos.filter((e) => ATIVOS.includes(e.status));
   const proximos = ativos
     .filter((e) => (e.data_fim || e.data_evento) >= h)
     .sort((a, b) => a.data_evento.localeCompare(b.data_evento));
   const pontos = pontosDeAtencao(dados, h);
+  const urgentes = pontos.filter((p) => p.tag === 'bad').length;
+  const daSemana = eventosDaSemana(eventos, h);
+  const sem = semana(h);
   const frase = fraseDoDia(frases, h);
   const primeiroNome = usuario.nome.split(' ')[0];
 
@@ -79,20 +98,26 @@ export function desenharPainel(main, usuario, dados, h = hoje()) {
   }).join('');
 
   const vazioEventos = usuario.admin
-    ? 'Nenhum evento por vir. Assim que a tela Novo evento ficar pronta, eles aparecem aqui.'
+    ? 'Nenhum evento por vir. Crie um em “+ Novo evento”.'
     : 'Você ainda não está na equipe de nenhum evento por vir.';
 
   main.innerHTML = `
     <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center">
       <div>
         <div class="muted">${esc(primeiroNome)} · ${esc(dataPorExtenso())}</div>
-        <h1>${esc(frase || `Olá, ${primeiroNome}!`)}</h1>
+        <h1 id="frase">${esc(frase || `Olá, ${primeiroNome}!`)}</h1>
+        ${usuario.admin && acoes.editarFrases ? '<button type="button" class="btn-link" id="editar-frases">✎ Frases do dia</button>' : ''}
       </div>
       ${novoEvento}
     </div>
 
     <div class="kpis">
       <div class="box kpi"><span class="muted">Eventos ativos</span><b>${ativos.length}</b></div>
+      <div class="box kpi"><span class="muted">Eventos esta semana</span><b>${daSemana.length}</b>
+        <span class="muted">${dataCurta(sem.inicio)} a ${dataCurta(sem.fim)}${daSemana.length ? ` · ${esc(daSemana.slice(0, 2).map((e) => e.nome).join(', '))}${daSemana.length > 2 ? '…' : ''}` : ''}</span></div>
+      <a class="box kpi" href="#pontos" style="text-decoration:none;color:var(--text)"><span class="muted">Pontos de atenção</span>
+        <b${urgentes ? ' style="color:var(--danger)"' : ''}>${pontos.length}</b>
+        <span class="muted">${urgentes ? `${urgentes} atrasado(s) ou indeferido(s)` : pontos.length ? 'nenhum atrasado' : 'tudo em dia'}</span></a>
     </div>
 
     <section class="box">
@@ -104,10 +129,17 @@ export function desenharPainel(main, usuario, dados, h = hoje()) {
         : `<div class="vazio">${vazioEventos}</div>`}
     </section>
 
-    <section class="box">
+    <section class="box" id="pontos">
       <h2>Pontos de atenção</h2>
       ${pontos.length
         ? `<div class="atencao">${pontos.map((p) => `<div><span class="tag ${p.tag}">${esc(p.selo)}</span><span>${esc(p.texto)}</span></div>`).join('')}</div>`
         : '<div class="vazio">Nada pedindo atenção agora.</div>'}
     </section>`;
+
+  main.querySelector('#editar-frases')?.addEventListener('click', async () => {
+    try {
+      const ativas = await acoes.editarFrases();
+      main.querySelector('#frase').textContent = fraseDoDia(ativas, h) || `Olá, ${primeiroNome}!`;
+    } catch (e) { console.error(e); alert('Não foi possível abrir as frases do dia.'); }
+  });
 }

@@ -21,8 +21,9 @@ Contexto completo para o Claude Code: **CLAUDE.md**. Especificações: **docs/**
 - Em **SQL Editor**, rode nesta ordem:
   1. `supabase/migrations/20261126000000_schema_v0_3.sql`
   2. `supabase/migrations/20261126010000_criar_evento.sql`
-  3. `supabase/seed.sql`
-  4. (opcional) `supabase/exemplos.sql`: eventos de exemplo
+  3. `supabase/migrations/20261126020000_excluir_evento.sql`
+  4. `supabase/seed.sql`
+  5. (opcional) `supabase/exemplos.sql`: eventos de exemplo
 - Em **Project Settings → API**, copie a **Project URL** e a **anon public key** para `app/js/config.js`.
   A `service_role` key **nunca** vai para o código nem para o GitHub.
 - Alternativa pelo terminal: instalar a Supabase CLI, `supabase link` e `supabase db push`.

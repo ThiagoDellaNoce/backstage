@@ -46,7 +46,7 @@ export function proximosDias(evento, cronograma, marcos, h = hoje()) {
 
 /**
  * @param dados  { evento, abas, dimensionamento, equipe:[{usuario_id,papel,nome}], usuarios, planilha, documentos, cronograma, marcos, docsLigada }
- * @param acoes  { status(novo), adicionar(usuario_id, papel), remover(usuario_id) } — devolvem Promise
+ * @param acoes  { status(novo), adicionar(usuario_id, papel), remover(usuario_id), excluir() } — devolvem Promise
  */
 export function desenharEvento(main, usuario, dados, acoes, h = hoje()) {
   const { evento } = dados;
@@ -73,6 +73,7 @@ export function desenharEvento(main, usuario, dados, acoes, h = hoje()) {
           ${Object.entries(STATUS_EVENTO).map(([k, v]) => `<option value="${k}"${k === evento.status ? ' selected' : ''}>${v.nome}</option>`).join('')}
         </select>
         <a class="btn btn-ghost" aria-disabled="true" title="Tela Editar evento: em breve">Editar evento</a>
+        ${usuario.admin && acoes.excluir ? '<button type="button" class="btn btn-ghost" id="excluir" title="Excluir evento e tudo dele" style="color:var(--danger)">Excluir</button>' : ''}
       </div>
     </div>
     <div id="aviso" class="msg" role="status" hidden></div>
@@ -126,6 +127,8 @@ export function desenharEvento(main, usuario, dados, acoes, h = hoje()) {
         </div>`}
       </section>
     </div>`;
+
+  main.querySelector('#excluir')?.addEventListener('click', () => acoes.excluir());
 
   // ---------- Status ----------
   const aviso = main.querySelector('#aviso');

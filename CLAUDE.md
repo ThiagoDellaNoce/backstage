@@ -49,7 +49,7 @@ Módulos: Painel · Eventos · Visão geral do evento · Planilha de trabalho (+
 | Checklist de telas | Ao criar evento escolhe-se quais telas ele terá (`evento_modulos`). Desligar só esconde, não apaga. Visão geral e Planilha são fixas. |
 | Memórias | Cada uma tem tabela própria; o banco calcula; **só o resultado sobe** para o item da planilha. |
 | Dimensionamento | Pelo público, sempre arredondando para cima: baias 1/250, banheiros 1/80, seguranças 1/100, bar 1 m/100. Parâmetros editáveis (`parametros_dimensionamento`). |
-| Painel | Frase do dia aleatória e divertida; "Pontos de atenção" (não "Atenção"); seção Asana; Próximos eventos com "Entrar no evento". |
+| Painel | Frase do dia aleatória e divertida, editável ali mesmo por gestor/planejamento ("✎ Frases do dia"); cards Eventos ativos · Eventos esta semana · Pontos de atenção; "Pontos de atenção" (não "Atenção"); seção Asana; Próximos eventos com "Entrar no evento". |
 
 ## Design
 
@@ -75,6 +75,8 @@ Tokens (o protótipo usa um mapeamento automático `--xHEX`; no app real use tok
 - Tema salvo por usuário no navegador (`localStorage` chave `backstage-tema`, atributo `data-tema` no `<html>`); seletor no fim do menu lateral e no login.
 - Menu lateral: Painel, Eventos · seção Empresa (Estoque, Cadastros) · Asana conectado · Tema · Sair. Dentro do evento, submenu com as abas; a Planilha tem submenu com as 10 memórias.
 - Abas do evento: Visão geral, Planilha de trabalho, Cronograma, Artístico, Documentação, Pagamentos (desabilitada, última).
+- Carregando: *skeleton screen* em todas as telas internas (blocos `.sk` no formato da tela, direto no HTML; o menu lateral também).
+- Excluir evento: só gestor/planejamento, na Visão geral e no cartão em Eventos; janela lista o que será apagado e pede o nome do evento.
 - Tabelas de memória funcionam como Excel: Enter cria a próxima linha, Tab avança, colar várias linhas do Excel; última linha vazia = inclusão rápida; "+ Novo item" abre janela.
 
 ## Banco v0.3 (resumo)
@@ -94,6 +96,8 @@ Arquivo: `supabase/migrations/20261126000000_schema_v0_3.sql` (fonte da verdade)
 - Cronograma: `cronograma_linhas` + `cronograma_marcacoes (dia_relativo, periodo, fase)`; gatilho recusa categoria com `entra_no_cronograma = false`. Visões `v_cronograma` (data real) e `v_cronograma_marcos`.
 - Gatilho `fn_evento_criado`: liga telas fixas e põe o criador na equipe. Documentos padrão só nascem quando a tela
   Documentação é ligada (gatilho `fn_documentacao_ligada`, migration 2).
+- Excluir evento apaga tudo dele (migration 3): memórias perdem só o setor se um setor for apagado (`ON DELETE SET NULL (setor_id)`);
+  movimentos de estoque do evento vão junto. `historico` é mantido.
 - `fn_criar_evento(p_evento, p_modulos, p_equipe)`: cria evento + checklist + equipe numa transação (tela Novo evento).
 - `historico` registra alterações de eventos, planilha, documentos e telas.
 - **RLS**: `fn_minha_empresa()`, `fn_sou_admin()` (papel gestor ou planejamento), `fn_acesso_evento(evento)` (admin ou na equipe).

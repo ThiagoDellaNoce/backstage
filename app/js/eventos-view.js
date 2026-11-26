@@ -63,20 +63,25 @@ function dataEvento(e) {
   return e.data_fim && e.data_fim !== e.data_evento ? `${f(e.data_evento)} a ${f(e.data_fim)}` : f(e.data_evento);
 }
 
-function cartao(e, docs, h) {
+function cartao(e, docs, h, admin) {
   const s = STATUS_EVENTO[e.status];
   const onde = [e.local, e.cidade].filter(Boolean).join(', ');
   const selos = selosDocumentos(e, docs, h);
-  return `<a class="box card${['encerrado', 'cancelado'].includes(e.status) ? ' apagado' : ''}" href="evento.html?id=${e.id}">
+  return `<div class="box card${['encerrado', 'cancelado'].includes(e.status) ? ' apagado' : ''}">
+    <a class="card-link" href="evento.html?id=${e.id}" aria-label="Abrir ${esc(e.nome)}"></a>
     <div class="topo"><b>${esc(e.nome)}</b><span class="tag ${s.tag}">${s.nome}</span></div>
     <div class="muted">${dataEvento(e)}${onde ? ` · ${esc(onde)}` : ''} · ${faltamHtml(e, h)}</div>
     ${e.contratante ? `<div class="muted">Contratante: ${esc(e.contratante)}</div>` : ''}
     ${selos.length ? `<div class="selos">${selos.map((x) => `<span class="tag ${x.tag}">${x.texto}</span>`).join('')}</div>` : ''}
-  </a>`;
+    ${admin ? `<div class="acao-card"><button type="button" class="btn-lixo" data-excluir="${e.id}" title="Excluir evento">🗑 Excluir</button></div>` : ''}
+  </div>`;
 }
 
-/** Monta a tela. `dados` = { eventos, documentos }. */
-export function desenharEventos(main, usuario, dados, h = hoje()) {
+/**
+ * Monta a tela. `dados` = { eventos, documentos }.
+ * `acoes.excluir(evento)` → Promise<boolean> (só gestor/planejamento).
+ */
+export function desenharEventos(main, usuario, dados, h = hoje(), acoes = {}) {
   const f = filtrosDaUrl();
   const docsPor = {};
   for (const d of dados.documentos) (docsPor[d.evento_id] ||= []).push(d);
@@ -108,7 +113,7 @@ export function desenharEventos(main, usuario, dados, h = hoje()) {
     const lista = filtrar(dados.eventos, filtros, h);
     cont.textContent = `${lista.length} evento${lista.length === 1 ? '' : 's'}`;
     if (lista.length) {
-      cards.innerHTML = lista.map((e) => cartao(e, docsPor[e.id] || [], h)).join('');
+      cards.innerHTML = lista.map((e) => cartao(e, docsPor[e.id] || [], h, usuario.admin && acoes.excluir)).join('');
     } else if (!dados.eventos.length) {
       cards.innerHTML = `<div class="vazio">${usuario.admin
         ? 'Nenhum evento cadastrado ainda.'
@@ -117,6 +122,16 @@ export function desenharEventos(main, usuario, dados, h = hoje()) {
       cards.innerHTML = '<div class="vazio">Nenhum evento com esses filtros.</div>';
     }
   }
+
+  cards.addEventListener('click', async (ev) => {
+    const b = ev.target.closest('[data-excluir]');
+    if (!b) return;
+    const e = dados.eventos.find((x) => x.id === Number(b.dataset.excluir));
+    if (e && await acoes.excluir(e)) {
+      dados.eventos = dados.eventos.filter((x) => x.id !== e.id);
+      atualizar();
+    }
+  });
 
   q.addEventListener('input', atualizar);
   st.addEventListener('change', atualizar);

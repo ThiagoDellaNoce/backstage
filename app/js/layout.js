@@ -53,6 +53,8 @@ export function montarLayout(usuario, ativo, noEvento) {
     nav.className = 'side';
     nav.setAttribute('aria-label', 'Menu principal');
   }
+  nav.removeAttribute('aria-busy');
+  app.querySelector('main')?.removeAttribute('aria-busy');
 
   const sub = noEvento
     ? `<div class="sub"><div class="ev" title="${esc(noEvento.evento.nome)}">${esc(noEvento.evento.nome)}</div>${noEvento.abas.map((a) => itemAba(a, noEvento.evento.id, noEvento.aba)).join('')}${PAGAMENTOS}</div>`

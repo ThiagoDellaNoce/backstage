@@ -4,6 +4,7 @@ import { exigirLogin } from './auth.js';
 import { montarLayout } from './layout.js';
 import { hoje } from './util.js';
 import { desenharPainel } from './painel-view.js';
+import { editarFrases } from './frases.js';
 
 const usuario = await exigirLogin();
 const main = montarLayout(usuario, 'painel');
@@ -26,7 +27,7 @@ async function carregar() {
   let documentos = [], cronogramaHoje = [];
 
   if (ids.length) {
-    const [doc, cro] = await Promise.all([
+    const [doc, cro, mod] = await Promise.all([
       supabase.from('documentos')
         .select('id, evento_id, status, prazo_dia_relativo, descricao, tipos_documento(nome)')
         .in('evento_id', ids)
@@ -35,10 +36,13 @@ async function carregar() {
         .select('evento_id, titulo, periodo, fase')
         .in('evento_id', ids)
         .eq('data', h),
+      supabase.from('evento_modulos').select('evento_id').in('evento_id', ids).eq('modulo', 'documentacao').eq('ativo', true),
     ]);
     if (doc.error) throw doc.error;
     if (cro.error) throw cro.error;
-    documentos = doc.data;
+    if (mod.error) throw mod.error;
+    const comDocs = new Set(mod.data.map((m) => m.evento_id)); // só eventos com a Documentação ligada
+    documentos = doc.data.filter((d) => comDocs.has(d.evento_id));
     cronogramaHoje = cro.data;
   }
 
@@ -46,7 +50,7 @@ async function carregar() {
 }
 
 try {
-  desenharPainel(main, usuario, await carregar());
+  desenharPainel(main, usuario, await carregar(), hoje(), { editarFrases: () => editarFrases(usuario) });
 } catch (e) {
   console.error(e);
   main.innerHTML = '<div class="msg msg-erro">Não foi possível carregar o painel. Recarregue a página em instantes.</div>';

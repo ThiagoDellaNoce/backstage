@@ -34,7 +34,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     var side = document.querySelector('nav.side'), slot = document.getElementById('tema-slot');
-    if (side) { if (!side.querySelector('.tema')) side.insertBefore(box(), side.querySelector('[data-sair]') || null); }
+    if (side) { if (!side.querySelector('.tema') && !side.hasAttribute('aria-busy')) side.insertBefore(box(), side.querySelector('[data-sair]') || null); }
     else if (slot) slot.appendChild(box());
     set(t);
   });

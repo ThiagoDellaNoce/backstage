@@ -5,7 +5,7 @@ Atores: **Usuário** (qualquer pessoa logada) ▷ **Membro da equipe** (arquitet
 | ID | Caso de uso | Pacote | Atores | Descrição | Telas |
 |---|---|---|---|---|---|
 | UC01 | Entrar no sistema | Acesso e painel | Usuário, Google | Login com a conta Google da EXP (ou e-mail e senha). O sistema confere se a pessoa está cadastrada e ativa e carrega empresa e papel. | Login |
-| UC02 | Ver painel do dia | Acesso e painel | Usuário | Frase do dia, tarefas do Asana (para hoje, atrasadas, na fila), próximos eventos e pontos de atenção. «include» UC04. | Painel |
+| UC02 | Ver painel do dia | Acesso e painel | Usuário | Frase do dia, indicadores (eventos ativos, eventos esta semana, pontos de atenção), tarefas do Asana (para hoje, atrasadas, na fila), próximos eventos e pontos de atenção. «include» UC04. | Painel |
 | UC03 | Conectar conta do Asana | Acesso e painel | Usuário, Asana | Autoriza o Backstage a ler as tarefas da pessoa. O token fica guardado no cofre (Vault), nunca no navegador. | Painel (menu lateral) |
 | UC04 | Consultar tarefas do Asana | Acesso e painel | Asana | Uma função no servidor (Edge Function) busca as tarefas com o token do cofre e devolve os totais ao painel. | Painel |
 | UC05 | Escolher tema (Roxo ou Verde) | Acesso e painel | Usuário | Alterna entre o tema Roxo (#6b3e92) e o Verde (#1DB954 sobre #212121). A escolha fica salva no navegador. | Login, menu lateral |
@@ -16,12 +16,12 @@ Atores: **Usuário** (qualquer pessoa logada) ▷ **Membro da equipe** (arquitet
 | UC10 | Criar evento | Eventos | Administrador | Assistente com os dados do evento e o checklist de telas. Ao salvar, o banco liga as telas fixas, cria os documentos padrão e põe o criador na equipe. «include» UC11. | Novo evento (a desenhar) |
 | UC11 | Ligar ou desligar telas do evento | Eventos | Administrador | Checklist das telas do evento (cronograma, artístico, documentação, cada memória de cálculo). Desligar só esconde; nenhum dado é apagado. | Novo evento / Editar evento (a desenhar) |
 | UC12 | Gerenciar equipe do evento | Eventos | Membro da equipe | Adiciona e remove pessoas do evento e define a função de cada uma. Quem entra na equipe passa a ver o evento. | Evento · Visão geral (Equipe) |
-| UC13 | Excluir evento | Eventos | Administrador | Remove o evento e tudo o que pertence a ele (planilha, memórias, cronograma, documentos, artístico). | Eventos |
+| UC13 | Excluir evento | Eventos | Administrador | Remove o evento e tudo o que pertence a ele (planilha, memórias, setores, cronograma, documentos, artístico, conferências, anexos, movimentos de estoque, equipe). Pede para digitar o nome do evento. O histórico de alterações é mantido. | Eventos, Visão geral |
 | UC14 | Gerenciar fornecedores | Administração da empresa | Administrador | Cadastro com CNPJ, categoria, contato, telefone e dados bancários; mostra histórico de eventos e valores em aberto. | Cadastros · Fornecedores |
 | UC15 | Gerenciar catálogo de itens | Administração da empresa | Administrador | Itens reutilizáveis por categoria, com unidade padrão e o modelo de memória de cálculo que cada um usa. | Cadastros · Catálogo, Novo item no catálogo |
 | UC16 | Gerenciar hotéis | Administração da empresa | Administrador | Hotéis usados nas hospedagens do artístico. | Cadastros · Hotéis |
 | UC17 | Gerenciar usuários e papéis | Administração da empresa | Administrador | Cadastra pessoas, define o papel padrão (gestor, planejamento, arquiteto, produtores, freelance) e desativa acessos. | Cadastros · Usuários |
-| UC18 | Configurar parâmetros | Administração da empresa | Administrador | Regras de dimensionamento pelo público, tipos de documento padrão, modelos de evento e frases do dia. | A desenhar |
+| UC18 | Configurar parâmetros | Administração da empresa | Administrador | Regras de dimensionamento pelo público, tipos de documento padrão, modelos de evento e frases do dia. | Frases do dia: Painel (✎). Demais: a desenhar |
 | UC19 | Consultar histórico de alterações | Administração da empresa | Administrador | Quem criou, mudou ou apagou eventos, itens da planilha, documentos e telas do evento, com o antes e o depois. | A desenhar |
 | UC20 | Adicionar itens do catálogo | Planilha de trabalho | Membro da equipe | Marca no catálogo os itens que o evento vai contratar; pode copiar a seleção de outro evento. | Adicionar itens do catálogo |
 | UC21 | Editar item da planilha | Planilha de trabalho | Membro da equipe | Fornecedor, descritivo, responsável, observação, quantidade, frequência, valor unitário e status de contrato e produção. | Detalhe do item |

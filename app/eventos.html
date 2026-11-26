@@ -11,8 +11,14 @@
 </head>
 <body>
   <div class="app">
-    <main class="main">
-      <div class="carregando">Carregando…</div>
+    <nav class="side" aria-busy="true" aria-label="Menu principal">
+      <div class="marca">backstage</div>
+      <span class="sk sk-linha" style="width:60%"></span><span class="sk sk-linha" style="width:50%"></span>
+      <span class="sk sk-linha" style="width:40%;margin-top:28px"></span><span class="sk sk-linha" style="width:55%"></span>
+    </nav>
+    <main class="main" aria-busy="true">
+      <span class="sr-only">Carregando…</span>
+      <div style="display:flex;justify-content:space-between"><span class="sk sk-titulo" style="width:20%"></span><span class="sk sk-btn"></span></div><span class="sk" style="height:40px"></span><div class="cards"><span class="sk sk-card"></span><span class="sk sk-card"></span><span class="sk sk-card"></span><span class="sk sk-card"></span><span class="sk sk-card"></span><span class="sk sk-card"></span></div>
     </main>
   </div>
   <script type="module" src="js/eventos.js"></script>
