@@ -85,7 +85,7 @@ export function desenharEventos(main, usuario, dados, h = hoje()) {
   main.innerHTML = `
     <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center">
       <h1>Eventos</h1>
-      ${usuario.admin ? '<a class="btn btn-primary" aria-disabled="true" title="Tela Novo evento: em breve">+ Novo evento</a>' : ''}
+      ${usuario.admin ? '<a class="btn btn-primary" href="novo-evento.html">+ Novo evento</a>' : ''}
     </div>
     <div class="filtros">
       <input id="f-q" type="search" aria-label="Buscar evento" placeholder="Buscar por nome, local, cidade ou contratante" value="${esc(f.q)}">

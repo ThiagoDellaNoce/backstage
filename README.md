@@ -20,7 +20,9 @@ Contexto completo para o Claude Code: **CLAUDE.md**. Especificações: **docs/**
 - Em supabase.com, crie um projeto (região **South America (São Paulo)**). Guarde a senha do banco.
 - Em **SQL Editor**, rode nesta ordem:
   1. `supabase/migrations/20261126000000_schema_v0_3.sql`
-  2. `supabase/seed.sql`
+  2. `supabase/migrations/20261126010000_criar_evento.sql`
+  3. `supabase/seed.sql`
+  4. (opcional) `supabase/exemplos.sql`: eventos de exemplo
 - Em **Project Settings → API**, copie a **Project URL** e a **anon public key** para `app/js/config.js`.
   A `service_role` key **nunca** vai para o código nem para o GitHub.
 - Alternativa pelo terminal: instalar a Supabase CLI, `supabase link` e `supabase db push`.
@@ -56,4 +58,4 @@ Os próximos usuários serão cadastrados pela tela de Cadastros → Usuários (
 ## Testes do banco
 `supabase/tests/`: `stub.sql` simula o `auth` do Supabase num PostgreSQL local; `test.sql` cria um evento de exemplo e confere
 cálculos e permissões; `fail.sql` confere que as regras barram o que devem barrar.
-Ordem: stub → migration → seed → test → fail.
+Ordem: stub → migrations (em ordem) → seed → test → fail.

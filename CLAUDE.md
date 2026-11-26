@@ -92,7 +92,10 @@ Arquivo: `supabase/migrations/20261126000000_schema_v0_3.sql` (fonte da verdade)
   - Com. visual m² = L × A (valor digitado); Forração total = m² × preço × qtd; Cenografia total = preço × qtd, `acima_do_teto`; Banheiro total = qtd + PNE; LED m² = L × A.
 - `v_memoria_resultado` → `v_planilha`: memória com R$ dá o valor; memória sem R$ dá a quantidade (valor = qtd × freq × unitário); sem memória, tudo digitado.
 - Cronograma: `cronograma_linhas` + `cronograma_marcacoes (dia_relativo, periodo, fase)`; gatilho recusa categoria com `entra_no_cronograma = false`. Visões `v_cronograma` (data real) e `v_cronograma_marcos`.
-- Gatilho `fn_evento_criado`: liga telas fixas, cria documentos padrão, põe o criador na equipe. `historico` registra alterações de eventos, planilha, documentos e telas.
+- Gatilho `fn_evento_criado`: liga telas fixas e põe o criador na equipe. Documentos padrão só nascem quando a tela
+  Documentação é ligada (gatilho `fn_documentacao_ligada`, migration 2).
+- `fn_criar_evento(p_evento, p_modulos, p_equipe)`: cria evento + checklist + equipe numa transação (tela Novo evento).
+- `historico` registra alterações de eventos, planilha, documentos e telas.
 - **RLS**: `fn_minha_empresa()`, `fn_sou_admin()` (papel gestor ou planejamento), `fn_acesso_evento(evento)` (admin ou na equipe).
   Admin vê/edita tudo; demais só eventos em que estão na equipe; checklist, criar/excluir evento e cadastros só admin.
 - Testes: `supabase/tests/` (rodar num Postgres local com o stub de `auth`). Todos passaram na v0.3.
@@ -136,8 +139,8 @@ Chaves: a `anon key` e a URL do Supabase podem ir no front (a segurança está n
 8. Setor nas memórias deve ser lista dos setores do evento.
 9. **Permissões**: hoje membros gerenciam a equipe e apagam itens; `modelo_modulos` pode ser apagado por qualquer usuário (falta trava no DELETE); estoque aberto a todos; usuário não edita o próprio perfil; perfis iguais para todos os papéis não-admin.
 10. Botões "+ Cadastrar fornecedor" e "Cadastrar novo item" aparecem para quem o banco bloqueia.
-11. Estoque: saída deve baixar a reserva? 12. Filtro de status em Eventos sem Desmontagem/Cancelado.
-13. ~~Login por e-mail e senha~~ decidido: só Google. 14. Telas a desenhar: Novo evento, Editar evento, Conectar Asana, Cadastros (catálogo, hotéis, usuários), Configurações, Histórico, Mão de obra, celular.
+11. Estoque: saída deve baixar a reserva? 12. ~~Filtro de status em Eventos~~ feito.
+13. ~~Login por e-mail e senha~~ decidido: só Google. 14. Telas a desenhar: Editar evento, Conectar Asana, Cadastros (catálogo, hotéis, usuários), Configurações, Histórico, Mão de obra, celular.
 
 ## Histórico das versões do banco
 

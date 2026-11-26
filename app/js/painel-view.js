@@ -63,7 +63,7 @@ export function desenharPainel(main, usuario, dados, h = hoje()) {
   const primeiroNome = usuario.nome.split(' ')[0];
 
   const novoEvento = usuario.admin
-    ? '<a class="btn btn-primary" aria-disabled="true" title="Tela Novo evento: em breve">+ Novo evento</a>'
+    ? '<a class="btn btn-primary" href="novo-evento.html">+ Novo evento</a>'
     : '';
 
   const linhas = proximos.map((e) => {

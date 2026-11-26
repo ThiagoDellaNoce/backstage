@@ -65,3 +65,15 @@ export const STATUS_EVENTO = {
 
 export const FASE = { montagem: 'Montagem', operacao: 'Operação', desmontagem: 'Desmontagem' };
 export const PERIODO = { manha: 'manhã', tarde: 'tarde', noite: 'noite' };
+
+export const PAPEL = {
+  gestor: 'Gestor', planejamento: 'Planejamento', arquiteto: 'Arquiteto',
+  produtor_bar: 'Produtor de bar', produtor_palco: 'Produtor de palco',
+  produtor_geral: 'Produtor geral', freelance: 'Freelance',
+};
+
+/** Aviso de uma tela para a próxima (ex.: "Evento criado"). */
+export function avisar(texto) { try { sessionStorage.setItem('backstage-aviso', texto); } catch {} }
+export function lerAviso() {
+  try { const t = sessionStorage.getItem('backstage-aviso'); sessionStorage.removeItem('backstage-aviso'); return t; } catch { return null; }
+}

@@ -3,6 +3,7 @@ import { supabase } from './supabase.js';
 import { exigirLogin } from './auth.js';
 import { montarLayout } from './layout.js';
 import { desenharEventos } from './eventos-view.js';
+import { lerAviso } from './util.js';
 
 const usuario = await exigirLogin();
 const main = montarLayout(usuario, 'eventos');
@@ -27,6 +28,14 @@ async function carregar() {
 
 try {
   desenharEventos(main, usuario, await carregar());
+  const aviso = lerAviso();
+  if (aviso) {
+    const m = document.createElement('div');
+    m.className = 'msg msg-info';
+    m.setAttribute('role', 'status');
+    m.textContent = aviso;
+    main.querySelector('.filtros').before(m);
+  }
 } catch (e) {
   console.error(e);
   main.innerHTML = '<div class="msg msg-erro">Não foi possível carregar os eventos. Recarregue a página em instantes.</div>';

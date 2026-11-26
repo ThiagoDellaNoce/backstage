@@ -15,4 +15,4 @@
 | 11 | Estoque | Definir se a saída baixa a reserva. | Estoque · v_estoque_saldo |
 | 12 | Eventos | ✅ Feito (26/11/2026): filtro de status com todos os 6 status. | Eventos |
 | 13 | Login | ✅ Decidido (26/11/2026): só Google (conta exp.rec.br). E-mail e senha removidos. | Login |
-| 14 | Telas a desenhar | Novo evento, Editar evento, Conectar Asana, Cadastros (catálogo, hotéis, usuários), Configurações, Histórico, Mão de obra, versão celular. | Protótipo |
+| 14 | Telas a desenhar | Editar evento, Conectar Asana, Cadastros (catálogo, hotéis, usuários), Configurações, Histórico, Mão de obra, versão celular. | Protótipo |

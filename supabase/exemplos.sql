@@ -1,6 +1,6 @@
 -- =====================================================================
 -- EVENTOS DE EXEMPLO (só para ver as telas com dados)
--- Rodar no SQL Editor do Supabase DEPOIS do schema, do seed e do
+-- Rodar no SQL Editor do Supabase DEPOIS das migrations, do seed e do
 -- cadastro do primeiro usuário. As datas são relativas a hoje.
 -- Todos os nomes começam com "[Exemplo]". Para apagar tudo, rode só:
 --   DELETE FROM eventos WHERE nome LIKE '[Exemplo]%';
@@ -9,7 +9,7 @@
 -- Limpa uma rodada anterior, para poder rodar de novo
 DELETE FROM eventos WHERE nome LIKE '[Exemplo]%';
 
--- 1. Eventos (o gatilho cria os documentos padrão e põe o criador na equipe)
+-- 1. Eventos (o gatilho põe o criador na equipe)
 INSERT INTO eventos (empresa_id, nome, contratante, local, cidade, data_evento, data_fim, publico_estimado, status, criado_por)
 SELECT u.empresa_id, e.nome, e.contratante, e.local, e.cidade,
        current_date + e.ini, current_date + e.fim, e.publico, e.status::status_evento, u.id
@@ -21,6 +21,13 @@ FROM (SELECT * FROM usuarios WHERE papel IN ('gestor', 'planejamento') AND ativo
   ('[Exemplo] Show Sertanejo',      'Arena Shows',       'Arena Multiuso',       'Uberlândia', 30,  30,  5000, 'planejamento'),
   ('[Exemplo] Congresso Médico',    'Associação Médica', 'Centro de Convenções', 'Uberaba',    60,  62,   900, 'planejamento')
 ) AS e(nome, contratante, local, cidade, ini, fim, publico, status);
+
+-- Telas ligadas (ligar a Documentação cria os documentos padrão)
+INSERT INTO evento_modulos (evento_id, modulo, ativo)
+SELECT ev.id, m.codigo, true
+FROM eventos ev, modulos m
+WHERE ev.nome LIKE '[Exemplo]%' AND m.codigo IN ('cronograma', 'documentacao', 'gradil_tenda', 'piso_fechamento')
+ON CONFLICT DO NOTHING;
 
 -- 2. Documentos: prazos e situações para aparecerem nos Pontos de atenção
 UPDATE documentos d
