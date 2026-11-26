@@ -37,7 +37,8 @@ Módulos: Painel · Eventos · Visão geral do evento · Planilha de trabalho (+
 | Tema | Decisão |
 |---|---|
 | Front-end | HTML, CSS e JavaScript **puro** (sem framework, sem build obrigatório). `supabase-js` por ESM/CDN. |
-| Hospedagem | **Cloudflare** (Workers com arquivos estáticos, pasta `app`), publicando a cada push na `main` do **GitHub**. Endereço: https://backstage.thiago-2dd.workers.dev |
+| Hospedagem | **Cloudflare** (Workers com arquivos estáticos, pasta `app`, config em `wrangler.jsonc`). Endereço: https://backstage.thiago-2dd.workers.dev |
+| Branches | Trabalho na **`main`**. O Cloudflare publica só a branch **`deploy`**. Publicar = levar a main para a deploy (`git push origin main:deploy`), **só quando o Della pedir**. |
 | Banco e login | **Supabase**: PostgreSQL com RLS, gatilhos e visões; login **Google** (conta da EXP, domínio exp.rec.br); Storage para anexos; Edge Functions; Vault para tokens. |
 | Apps Script | Só para integrações Google (ex.: exportar planilha para Sheets). |
 | Pagamentos | **Fora do MVP.** A EXP já tem um sistema de pagamentos em Apps Script. A aba aparece desabilitada ("em breve") e no fim dos menus. No banco há só `pagamento_ref_externa`. Tentativa de iframe foi descartada (exige `setXFrameOptionsMode(ALLOWALL)` e há problemas de login/cookie). |

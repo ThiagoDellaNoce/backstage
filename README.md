@@ -51,10 +51,20 @@ WHERE u.email = 'seu-email@exp.rec.br' AND e.nome = 'EXP Produções';
 
 Os próximos usuários serão cadastrados pela tela de Cadastros → Usuários (a construir).
 
-### 5. Cloudflare Pages
-- **Workers & Pages → Create → Pages → Connect to Git** → escolha o repositório.
-- Framework: **None**. Comando de build: **vazio**. Pasta de saída: **`app`**.
-- Cada push na branch principal publica sozinho.
+### 5. Cloudflare (Workers)
+- O projeto é um Worker com arquivos estáticos; a configuração está em `wrangler.jsonc` (publica só a pasta `app`).
+- **Workers & Pages → backstage → Settings → Build**: repositório ligado, **Production branch = `deploy`**,
+  deploy command `npx wrangler deploy`. Desligue os builds de outras branches (non-production).
+
+### Fluxo de publicação
+- O trabalho do dia a dia vai para a branch **`main`** (o site não muda).
+- Para publicar, leve a main para a branch **`deploy`**:
+
+  ```
+  git push origin main:deploy
+  ```
+
+- O Cloudflare vê o push na `deploy` e publica em ~1 minuto.
 
 ## Testes do banco
 `supabase/tests/`: `stub.sql` simula o `auth` do Supabase num PostgreSQL local; `test.sql` cria um evento de exemplo e confere
