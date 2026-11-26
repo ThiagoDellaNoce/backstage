@@ -10,9 +10,8 @@ Arquivo do protótipo: `prototipo/index.html`
 **Como chegar:** Endereço do sistema (primeira tela).
 
 **Blocos:**
-- **Formulário:** E-mail (placeholder nome@exp.rec.br), Senha e botão “Entrar”.
-- **Entrar com Google:** Caminho principal: login com a conta Google da EXP pelo Supabase Auth.
-- **Links:** “Esqueci minha senha” e “Ver o mapa do banco de dados” (este só no protótipo).
+- **Entrar com Google:** único caminho de login (decidido em 26/11/2026), com a conta Google da EXP pelo Supabase Auth.
+- **Links:** nenhum na versão real (“Esqueci minha senha” saiu junto com o login por senha; o mapa do banco é só do protótipo).
 - **Tema:** Seletor Roxo / Verde. A escolha vale para todas as telas e fica salva no navegador.
 
 **Regras:**
@@ -24,7 +23,7 @@ Arquivo do protótipo: `prototipo/index.html`
 **Quem pode:** Qualquer pessoa cadastrada.
 
 **Pendências:**
-- Decidir se o login por e-mail e senha continua, já que a decisão foi usar a conta Google da EXP.
+- Nenhuma.
 
 ## 2. Painel
 Arquivo do protótipo: `prototipo/Main.html`

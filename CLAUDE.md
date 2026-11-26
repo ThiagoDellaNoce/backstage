@@ -137,7 +137,7 @@ Chaves: a `anon key` e a URL do Supabase podem ir no front (a segurança está n
 9. **Permissões**: hoje membros gerenciam a equipe e apagam itens; `modelo_modulos` pode ser apagado por qualquer usuário (falta trava no DELETE); estoque aberto a todos; usuário não edita o próprio perfil; perfis iguais para todos os papéis não-admin.
 10. Botões "+ Cadastrar fornecedor" e "Cadastrar novo item" aparecem para quem o banco bloqueia.
 11. Estoque: saída deve baixar a reserva? 12. Filtro de status em Eventos sem Desmontagem/Cancelado.
-13. Manter login por e-mail e senha? 14. Telas a desenhar: Novo evento, Editar evento, Conectar Asana, Cadastros (catálogo, hotéis, usuários), Configurações, Histórico, Mão de obra, celular.
+13. ~~Login por e-mail e senha~~ decidido: só Google. 14. Telas a desenhar: Novo evento, Editar evento, Conectar Asana, Cadastros (catálogo, hotéis, usuários), Configurações, Histórico, Mão de obra, celular.
 
 ## Histórico das versões do banco
 

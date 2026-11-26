@@ -14,5 +14,5 @@
 | 10 | Botões de cadastro | Esconder “+ Cadastrar fornecedor” e “Cadastrar novo item” de quem não é administrador, ou liberar no banco. | Detalhe do item · Mobília · Catálogo |
 | 11 | Estoque | Definir se a saída baixa a reserva. | Estoque · v_estoque_saldo |
 | 12 | Eventos | Incluir Desmontagem e Cancelado no filtro de status. | Eventos |
-| 13 | Login | Manter ou retirar o login por e-mail e senha. | Login |
+| 13 | Login | ✅ Decidido (26/11/2026): só Google (conta exp.rec.br). E-mail e senha removidos. | Login |
 | 14 | Telas a desenhar | Novo evento, Editar evento, Conectar Asana, Cadastros (catálogo, hotéis, usuários), Configurações, Histórico, Mão de obra, versão celular. | Protótipo |
