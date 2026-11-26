@@ -1,0 +1,12 @@
+// Configuração do Cloudflare Workers (site estático).
+// Publica só a pasta app/ a cada push na main (Workers Builds roda `npx wrangler deploy`).
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "backstage",
+  "compatibility_date": "2026-11-26",
+  "assets": {
+    "directory": "./app",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "none"
+  }
+}
