@@ -2,7 +2,7 @@
 import { supabase } from './supabase.js';
 import { exigirLogin } from './auth.js';
 import { montarLayout, abasDoEvento } from './layout.js';
-import { hoje, somarDias } from './util.js';
+import { hoje, somarDias, lerAviso } from './util.js';
 import { desenharEvento } from './evento-view.js';
 import { excluirEvento } from './excluir-evento.js';
 
@@ -69,6 +69,11 @@ try {
     main = montarLayout(usuario, 'eventos', { evento: dados.evento, abas: dados.abas, aba: 'visao_geral' });
     acoes.excluir = async () => { if (await excluirEvento(dados.evento)) location.href = 'eventos.html'; };
     desenharEvento(main, usuario, dados, acoes);
+    const aviso = lerAviso();
+    if (aviso) {
+      const a = main.querySelector('#aviso');
+      a.className = 'msg msg-info'; a.textContent = aviso; a.hidden = false;
+    }
   }
 } catch (e) {
   console.error(e);

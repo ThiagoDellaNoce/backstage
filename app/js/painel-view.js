@@ -93,7 +93,8 @@ export function desenharPainel(main, usuario, dados, h = hoje(), acoes = {}) {
       <td>${dataCurta(e.data_evento)}${e.data_fim && e.data_fim !== e.data_evento ? ` a ${dataCurta(e.data_fim)}` : ''}</td>
       <td>${faltamHtml(e, h)}</td>
       <td><span class="tag ${s.tag}">${s.nome}</span></td>
-      <td class="dir"><a class="btn btn-primary btn-sm" href="evento.html?id=${e.id}">Entrar no evento →</a></td>
+      <td class="dir"><a class="btn btn-ghost btn-sm" href="editar-evento.html?id=${e.id}" title="Editar evento">✎ Editar</a>
+        <a class="btn btn-primary btn-sm" href="evento.html?id=${e.id}">Entrar no evento →</a></td>
     </tr>`;
   }).join('');
 

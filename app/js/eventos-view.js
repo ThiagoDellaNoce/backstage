@@ -73,7 +73,10 @@ function cartao(e, docs, h, admin) {
     <div class="muted">${dataEvento(e)}${onde ? ` · ${esc(onde)}` : ''} · ${faltamHtml(e, h)}</div>
     ${e.contratante ? `<div class="muted">Contratante: ${esc(e.contratante)}</div>` : ''}
     ${selos.length ? `<div class="selos">${selos.map((x) => `<span class="tag ${x.tag}">${x.texto}</span>`).join('')}</div>` : ''}
-    ${admin ? `<div class="acao-card"><button type="button" class="btn-lixo" data-excluir="${e.id}" title="Excluir evento">🗑 Excluir</button></div>` : ''}
+    <div class="acao-card">
+      <a class="btn-lixo btn-editar" href="editar-evento.html?id=${e.id}" title="Editar evento">✎ Editar</a>
+      ${admin ? `<button type="button" class="btn-lixo" data-excluir="${e.id}" title="Excluir evento">🗑 Excluir</button>` : ''}
+    </div>
   </div>`;
 }
 

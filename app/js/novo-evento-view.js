@@ -1,36 +1,12 @@
 // Assistente "Novo evento": 1 Dados · 2 Telas · 3 Equipe · Resumo.
 // Não acessa o banco: recebe os cadastros em `dados` e chama `criar(payload)` no fim.
 import { esc, PAPEL } from './util.js';
+import { validarDados, montarDados, montarChecklist } from './evento-form.js';
 
-const GRUPOS = [
-  { id: 'modulo', nome: 'Módulos' },
-  { id: 'estrutura', nome: 'Estruturas' },
-  { id: 'tecnica_visual', nome: 'Técnica e visual' },
-  { id: 'mobiliario', nome: 'Mobiliário' },
-];
+export { dimensionar, validarDados } from './evento-form.js';
+
 const PASSOS = ['Dados do evento', 'Telas do evento', 'Equipe', 'Resumo'];
 const num = new Intl.NumberFormat('pt-BR');
-
-/** Dimensionamento pelo público: sempre arredonda para cima. */
-export function dimensionar(publico, parametros) {
-  if (!(publico > 0)) return [];
-  return [...parametros].sort((a, b) => a.ordem - b.ordem)
-    .map((p) => ({ nome: p.nome, unidade: p.unidade, valor: Math.ceil(publico / Number(p.pessoas_por_unidade)) }));
-}
-
-/** Valida o passo 1. Devolve { campo: mensagem }. */
-export function validarDados(d) {
-  const e = {};
-  if (!d.nome.trim()) e.nome = 'Dê um nome ao evento.';
-  if (!d.data_evento) e.data_evento = 'Informe a data do evento (dia 0).';
-  else {
-    const ano = +d.data_evento.slice(0, 4), agora = new Date().getFullYear();
-    if (ano < agora - 1 || ano > agora + 5) e.data_evento = `Confira o ano (${ano}).`;
-  }
-  if (d.data_fim && d.data_evento && d.data_fim < d.data_evento) e.data_fim = 'O término não pode ser antes do início.';
-  if (d.publico_estimado !== '' && !/^\d+$/.test(String(d.publico_estimado).replace(/\./g, ''))) e.publico_estimado = 'Use só números.';
-  return e;
-}
 
 /**
  * @param main     elemento <main>
@@ -41,7 +17,6 @@ export function validarDados(d) {
 export function desenharNovoEvento(main, usuario, dados, criar) {
   const opcionais = dados.modulos.filter((m) => !m.sempre_ativo && m.codigo !== 'pagamentos').sort((a, b) => a.ordem - b.ordem);
   const fixas = dados.modulos.filter((m) => m.sempre_ativo).sort((a, b) => a.ordem - b.ordem);
-  const nomeModulo = Object.fromEntries(dados.modulos.map((m) => [m.codigo, m.nome]));
 
   const st = {
     passo: 0,
@@ -73,81 +48,14 @@ export function desenharNovoEvento(main, usuario, dados, criar) {
   const erroGeral = main.querySelector('#erro-geral');
 
   // ---------- Passo 1: dados ----------
-  function campo(id, rotulo, tipo, extra = {}) {
-    const v = st.evento[id], err = st.erros[id];
-    return `<div class="campo${extra.largo ? ' largo' : ''}${err ? ' erro' : ''}">
-      <label for="c-${id}">${rotulo}${extra.obrig ? ' *' : ''}</label>
-      <input id="c-${id}" name="${id}" type="${tipo}" value="${esc(v)}"${extra.ph ? ` placeholder="${esc(extra.ph)}"` : ''}${extra.attrs || ''}>
-      ${err ? `<span class="msg-campo">${esc(err)}</span>` : extra.dica ? `<span class="dica">${extra.dica}</span>` : ''}
-    </div>`;
-  }
-
-  function htmlDimens() {
-    const pub = Number(String(st.evento.publico_estimado).replace(/\./g, ''));
-    const linhas = dimensionar(pub, dados.parametros);
-    if (!linhas.length) return '<div class="vazio">Informe o público estimado para ver o dimensionamento.</div>';
-    return `<div class="muted">${num.format(pub)} pessoas</div>` +
-      linhas.map((l) => `<div><span>${esc(l.nome)}</span><b>${num.format(l.valor)}${l.unidade === 'm' ? ' m' : ''}</b></div>`).join('');
-  }
-
   function passoDados() {
-    corpo.innerHTML = `
-      <div class="dados-lado">
-        <div class="form-grid">
-          ${campo('nome', 'Nome do evento', 'text', { obrig: true, largo: true, ph: 'Ex.: Festival de Verão 2027' })}
-          ${campo('contratante', 'Contratante', 'text', { ph: 'Cliente ou produtor' })}
-          ${campo('publico_estimado', 'Público estimado', 'text', { ph: 'Ex.: 8000', attrs: ' inputmode="numeric"' })}
-          ${campo('local', 'Local', 'text', { ph: 'Ex.: Parque do Lago' })}
-          ${campo('cidade', 'Cidade', 'text', { ph: 'Ex.: Uberaba' })}
-          ${campo('data_evento', 'Data do evento', 'date', { obrig: true, dica: 'É o dia 0 (D0): prazos e cronograma contam a partir dele.' })}
-          ${campo('data_fim', 'Data de término', 'date', { dica: 'Só se durar mais de um dia.' })}
-        </div>
-        <aside class="box" style="background:var(--bg)">
-          <h2>Dimensionamento</h2>
-          <div class="dimens" id="dimens">${htmlDimens()}</div>
-        </aside>
-      </div>`;
-    corpo.querySelectorAll('input').forEach((i) => i.addEventListener('input', () => {
-      st.evento[i.name] = i.value;
-      if (i.name === 'publico_estimado') corpo.querySelector('#dimens').innerHTML = htmlDimens();
-    }));
+    montarDados(corpo, st.evento, { parametros: dados.parametros, erros: st.erros });
     corpo.querySelector('#c-nome').focus();
   }
 
   // ---------- Passo 2: telas ----------
   function passoTelas() {
-    const modelos = dados.modelos.filter((m) => m.modulos.length);
-    corpo.innerHTML = `
-      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:8px">
-        <div class="muted">Marque o que este evento vai ter. Dá para mudar depois: desligar uma tela só a esconde, nada é apagado.</div>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          ${modelos.length ? `<select id="modelo" aria-label="Começar de um modelo"><option value="">Começar de um modelo…</option>${modelos.map((m) => `<option value="${m.id}">${esc(m.nome)}</option>`).join('')}</select>` : ''}
-          <button type="button" class="btn btn-ghost btn-sm" id="todas">Marcar todas</button>
-          <button type="button" class="btn btn-ghost btn-sm" id="limpar">Limpar</button>
-        </div>
-      </div>
-      <div class="grupo-telas">
-        <h3>Sempre ligadas</h3>
-        <div class="telas">${fixas.map((m) => `<label class="tela travada"><input type="checkbox" checked disabled><span><b>${esc(m.nome)}</b></span></label>`).join('')}</div>
-        ${GRUPOS.map((g) => {
-          const itens = opcionais.filter((m) => m.grupo === g.id);
-          if (!itens.length) return '';
-          return `<h3>${g.nome}</h3><div class="telas">${itens.map((m) => m.disponivel
-            ? `<label class="tela"><input type="checkbox" value="${m.codigo}"${st.modulos.has(m.codigo) ? ' checked' : ''}><span><b>${esc(m.nome)}</b>${m.pergunta ? `<small>${esc(m.pergunta)}</small>` : ''}</span></label>`
-            : `<label class="tela travada"><input type="checkbox" disabled><span><b>${esc(m.nome)} <span class="breve" style="margin-left:6px">em breve</span></b>${m.pergunta ? `<small>${esc(m.pergunta)}</small>` : ''}</span></label>`).join('')}</div>`;
-        }).join('')}
-      </div>`;
-    const caixas = () => corpo.querySelectorAll('input[type=checkbox][value]');
-    const sync = () => { st.modulos = new Set([...caixas()].filter((c) => c.checked).map((c) => c.value)); };
-    caixas().forEach((c) => c.addEventListener('change', sync));
-    corpo.querySelector('#todas').addEventListener('click', () => { caixas().forEach((c) => { c.checked = true; }); sync(); });
-    corpo.querySelector('#limpar').addEventListener('click', () => { caixas().forEach((c) => { c.checked = false; }); sync(); });
-    corpo.querySelector('#modelo')?.addEventListener('change', (e) => {
-      const m = modelos.find((x) => String(x.id) === e.target.value);
-      if (!m) return;
-      caixas().forEach((c) => { c.checked = m.modulos.includes(c.value); });
-      sync();
-    });
+    montarChecklist(corpo, dados.modulos, st.modulos, { modelos: dados.modelos });
   }
 
   // ---------- Passo 3: equipe ----------

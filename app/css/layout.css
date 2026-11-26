@@ -195,3 +195,7 @@ dialog.janela .rodape { display: flex; justify-content: flex-end; gap: 8px; padd
 .sk-card { height: 150px; border-radius: 10px; }
 .side .sk { background-color: var(--surface-2); }
 .side .sk-linha { height: 14px; margin: 12px 12px; }
+.card .acao-card { display: flex; gap: 4px; }
+.btn-lixo.btn-editar { text-decoration: none; }
+.btn-lixo.btn-editar:hover { color: var(--link); border-color: var(--border-strong); }
+td.dir .btn + .btn { margin-left: 6px; }

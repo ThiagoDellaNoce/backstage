@@ -40,7 +40,7 @@ Arquivo do protótipo: `prototipo/Main.html`
   Gestor e planejamento veem “✎ Frases do dia”, que abre uma janela para incluir, editar, ligar/desligar (sai do sorteio sem apagar) e apagar frases; grava na hora.
 - **Indicadores:** Eventos ativos · Eventos esta semana (seg a dom, com os nomes) · Pontos de atenção (total, quantos atrasados/indeferidos; clica e desce até a lista).
 - **Minhas tarefas no Asana:** Três cartões: Tarefas para hoje (com quantas já concluídas), Tarefas atrasadas (a mais antiga há N dias) e Na sua fila (em aberto atribuídas à pessoa). Mostra “Sincronizado há N min” e o botão “Abrir no Asana”.
-- **Próximos eventos:** Tabela Evento · Data · Faltam (D-x) · Status · Pagamento · “Entrar no evento →”.
+- **Próximos eventos:** Tabela Evento · Data · Faltam (D-x) · Status · “✎ Editar” · “Entrar no evento →”.
 - **Pontos de atenção:** Selos coloridos: Atrasado, Vence em 5d, Sem NF, Hoje, cada um com o item e o evento.
 - **Pagamentos da semana:** Tabela Vencimento · Evento · Item · Fornecedor · Parcela · Valor · Status.
 - **Menu lateral:** Painel, Eventos, Empresa (Estoque, Cadastros), Projeto (Mapa do banco), indicador “Asana conectado”, seletor de tema e Sair.
@@ -69,7 +69,7 @@ Arquivo do protótipo: `prototipo/Eventos.html`
 - **Topo:** Título e botão “+ Novo evento”.
 - **Filtros:** Busca por texto, status (Todos, Planejamento, Montagem, Operação, Encerrado) e período (Próximos, Este mês, Passados).
 - **Cartões de evento:** Nome, selo de status, data · local, cidade · D-x e alertas de documentos (pendentes, atrasados, indeferidos, Docs em dia).
-  Gestor e planejamento veem “🗑 Excluir” no cartão (mesma confirmação da Visão geral).
+  Rodapé do cartão: “✎ Editar” (todos que veem o evento) e “🗑 Excluir” (só gestor e planejamento; mesma confirmação da Visão geral).
 
 **Regras:**
 - Cada pessoa vê só os eventos em que está na equipe; gestor e planejamento veem todos.
@@ -111,13 +111,36 @@ Arquivo do protótipo: `prototipo/EventoGeral.html`
 - Sem Pago e Saldo (pagamentos fora do MVP). “Documentos aprovados” só aparece com a Documentação ligada.
 - “Próximos 3 dias” = hoje até hoje+2: cronograma por fase + marcos (prazos de documento, passagem de som, show).
 - “+ Adicionar” e “×” da equipe só para gestor/planejamento, até a pendência 9 (permissões) ser decidida; o banco ainda deixa membros.
-- “Editar evento” aparece desabilitado até a tela ser desenhada.
+- “✎ Editar evento” abre a tela Editar evento.
 - **Excluir** (só gestor e planejamento): janela que lista o que será apagado (itens da planilha, documentos, cronograma,
   setores, atrações, conferências, anexos, movimentos de estoque, equipe) e pede para digitar o nome do evento.
   Apaga tudo do evento; o histórico de alterações é mantido. Não dá para desfazer.
 
 **Pendências:**
-- Tela Editar evento (dados + checklist de telas).
+- Nenhuma.
+
+## 4b. Evento · Editar
+Arquivo: `app/editar-evento.html?id=` (não existia no protótipo).
+
+**Objetivo:** Corrigir os dados do evento e ligar/desligar telas depois de criado.
+
+**Como chegar:** Visão geral → “✎ Editar evento”; Eventos → “✎ Editar” no cartão; Painel → “✎ Editar” em Próximos eventos.
+
+**Blocos:**
+- **Dados do evento:** os mesmos campos do Novo evento + Status, com o dimensionamento ao lado.
+  Se a data do evento (dia 0) mudar, aparece o aviso de que prazos e cronograma acompanham a nova data.
+- **Telas do evento:** o mesmo checklist do Novo evento (com Marcar todas / Limpar).
+- **Salvar alterações** (volta para a Visão geral com “Alterações salvas.”) e **Cancelar**. Sair com mudanças não salvas pede confirmação do navegador.
+
+**Regras:**
+- Dados e status: qualquer pessoa da equipe e gestor/planejamento (RLS `editar_evento`).
+- Checklist: só gestor e planejamento; para os demais aparece travado. Desligar só esconde; religar traz tudo de volta.
+- Ligar a Documentação cria os documentos padrão que faltarem (gatilho `fn_documentacao_ligada`).
+- Validações iguais às do Novo evento (nome, data, término ≥ início, ano plausível, público numérico).
+
+**Dados:** `eventos, evento_modulos, modulos, parametros_dimensionamento`
+
+**Quem pode:** Equipe do evento e gestor/planejamento (checklist só gestor/planejamento).
 
 ## 5. Evento · Planilha de trabalho
 Arquivo do protótipo: `prototipo/Planilha.html`
@@ -663,8 +686,7 @@ Arquivo do protótipo: `prototipo/Banco.html`
 
 ## Telas ainda não desenhadas
 
-- **Novo evento:** Assistente com dados do evento, modelo pronto e checklist de telas.
-- **Editar evento / telas do evento:** Edição dos dados e do checklist depois de criado (só gestor e planejamento ligam ou desligam telas).
+- ~~Novo evento~~ e ~~Editar evento~~: feitas (`app/novo-evento.html`, `app/editar-evento.html`).
 - **Conectar Asana:** Autorização da conta e confirmação.
 - **Cadastros · Catálogo, Hotéis e Usuários:** Abas citadas na tela de Cadastros.
 - **Configurações:** Parâmetros de dimensionamento, tipos de documento, modelos de evento, frases do dia.

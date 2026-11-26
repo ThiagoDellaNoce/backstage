@@ -72,7 +72,7 @@ export function desenharEvento(main, usuario, dados, acoes, h = hoje()) {
         <select id="status" class="status">
           ${Object.entries(STATUS_EVENTO).map(([k, v]) => `<option value="${k}"${k === evento.status ? ' selected' : ''}>${v.nome}</option>`).join('')}
         </select>
-        <a class="btn btn-ghost" aria-disabled="true" title="Tela Editar evento: em breve">Editar evento</a>
+        <a class="btn btn-ghost" href="editar-evento.html?id=${evento.id}">✎ Editar evento</a>
         ${usuario.admin && acoes.excluir ? '<button type="button" class="btn btn-ghost" id="excluir" title="Excluir evento e tudo dele" style="color:var(--danger)">Excluir</button>' : ''}
       </div>
     </div>
