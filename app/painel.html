@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Backstage · Painel</title>
+  <script src="js/tema.js"></script>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <style>
+    /* Provisório: o Painel de verdade é a próxima tela. */
+    main { max-width: 640px; margin: 80px auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; }
+    h1 { margin: 0; font-size: 22px; }
+    p { margin: 0; color: var(--muted-2); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 id="ola">Carregando…</h1>
+    <p id="papel"></p>
+    <p>O Painel completo é a próxima tela a ser construída.</p>
+    <div><button id="sair" class="btn btn-ghost" type="button">Sair</button></div>
+  </main>
+  <script type="module">
+    import { exigirLogin, sair } from './js/auth.js';
+    const u = await exigirLogin();
+    document.getElementById('ola').textContent = `Olá, ${u.nome}`;
+    document.getElementById('papel').textContent = `${u.email} · ${u.papel}${u.admin ? ' (administrador)' : ''}`;
+    document.getElementById('sair').addEventListener('click', sair);
+  </script>
+</body>
+</html>

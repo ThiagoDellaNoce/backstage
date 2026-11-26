@@ -1,0 +1,39 @@
+/* Tokens dos temas. Roxo é o padrão; Verde via <html data-tema="verde">. */
+:root,
+html[data-tema="roxo"] {
+  --bg: #121016;
+  --surface: #1c1922;
+  --surface-2: #26222e;
+  --border: #352f40;
+  --border-strong: #4a4256;
+  --text: #f3f3f3;
+  --muted: #8d8698;
+  --muted-2: #b3adbd;
+  --primary: #6b3e92;
+  --on-primary: #ffffff;
+  --secondary: #f1613a;
+  --link: #d2b4f5;
+  --active-bg: #2e2340;
+  --ok: #7fe0a6;
+  --warn: #f5c26b;
+  --danger: #ff9a85;
+
+  --radius: 8px;
+  --radius-lg: 12px;
+  --font: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html[data-tema="verde"] {
+  --bg: #212121;
+  --surface: #2a2a2a;
+  --surface-2: #333333;
+  --border: #404040;
+  --border-strong: #525252;
+  --muted: #8f8f8f;
+  --muted-2: #b5b5b5;
+  --primary: #1db954;
+  --on-primary: #0d0d0d;
+  --secondary: #ffffff;
+  --link: #baefcd;
+  --active-bg: #2a4c36;
+}

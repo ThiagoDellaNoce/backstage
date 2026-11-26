@@ -1,0 +1,15 @@
+.login-wrap {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
+  background: var(--bg);
+}
+.login {
+  width: 100%; max-width: 380px; padding: 32px;
+  display: flex; flex-direction: column; gap: 16px;
+  background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-lg);
+}
+.login h1 { margin: 0; font-size: 22px; font-weight: 700; text-align: center; color: var(--link); }
+.login .sub { margin: -8px 0 4px; font-size: 13px; text-align: center; color: var(--muted-2); }
+.login .btn { width: 100%; }
+.login .btn svg { flex: none; }
+.login .nota { font-size: 12px; text-align: center; color: var(--muted); margin: 0; }
+.login .tema { margin: 0 -12px -12px; }

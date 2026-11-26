@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Detalhe do item</title>
+
+<link rel="stylesheet" href="tema.css">
+<script src="tema.js"></script>
+</head>
+<body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--xf3f3f3);background:var(--x121016)}
+a{color:var(--xd2b4f5)}a:hover{color:var(--xfff)}
+.wrap{max-width:960px;margin:0 auto;padding:20px 16px 120px;display:flex;flex-direction:column;gap:16px;box-sizing:border-box}
+.muted{color:var(--xb3adbd);font-size:13px}
+.box{background:var(--x1c1922);border:1px solid var(--x352f40);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:14px}
+.cols{display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start}
+.cols>*{flex:1 1 320px;min-width:0}
+.f{display:flex;flex-direction:column;gap:6px;flex:1 1 140px;min-width:0}
+label{font-size:13px;font-weight:600;color:var(--xf3f3f3)}
+input,select,textarea{height:44px;width:100%;box-sizing:border-box;border:1px solid var(--x4a4256);border-radius:10px;padding:0 12px;font:inherit;font-size:15px;background:var(--x121016);color:var(--xf3f3f3)}
+textarea{height:72px;padding:10px 12px;resize:vertical}
+.calc{border-color:var(--x6b3e92);background:var(--x1f1830)}
+.row2{display:flex;gap:12px;flex-wrap:wrap}
+.tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;background:var(--x2b2733);color:var(--xd6d1dd);white-space:nowrap}
+.ok{background:var(--x173a27);color:var(--x7fe0a6)}.warn{background:var(--x3d2e10);color:var(--xf5c26b)}.bad{background:var(--x41191a);color:var(--xff9a85)}.info{background:var(--x2e2340);color:var(--xd2b4f5)}
+.st{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.st div{background:var(--x26222e);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px}
+.line{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--x2a2532);font-size:14px}
+.total{display:flex;justify-content:space-between;align-items:baseline;background:var(--x26222e);border-radius:10px;padding:14px}
+.total b{font-size:24px}
+.foot{position:sticky;bottom:0;background:var(--x0c0a0f);border-top:1px solid var(--x2a2532);padding:12px 16px;display:flex;gap:10px;justify-content:flex-end}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 20px;border-radius:10px;background:var(--x6b3e92);color:var(--on-p);font-weight:600;font-size:15px;text-decoration:none}
+.btn2{background:transparent;border:1px solid var(--x4a4256);color:var(--xf3f3f3)}
+.sm{height:40px;padding:0 14px;font-size:14px}
+h1{margin:0;font-size:22px}h2{margin:0;font-size:16px}
+</style>
+
+<div style="min-height:1700px;display:flex;flex-direction:column">
+<div class="wrap" style="flex:1">
+<div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+<a href="Planilha.html" style="text-decoration:none;font-size:14px">← Planilha</a>
+<a href="javascript:void(0)" style="font-size:14px;color:var(--xff9a85);text-decoration:none">Remover item</a>
+</div>
+<div><div class="muted">[Evento A] · Estrutura geral</div><h1>Tendas</h1></div>
+<div class="st">
+<div><span class="muted">Contrato</span><select aria-label="Status do contrato"><option>Concluído</option><option>Pendente</option><option>Em andamento</option><option>Cancelado</option></select></div>
+<div><span class="muted">Produção</span><select aria-label="Status da produção"><option>Pendente</option><option>Em andamento</option><option>Concluído</option></select></div>
+<div><span class="muted">Pagamento</span><span class="tag bad" style="align-self:flex-start">Atrasado</span><span class="muted" style="font-size:12px">vem das parcelas</span></div>
+</div>
+<div class="cols">
+<div style="display:flex;flex-direction:column;gap:16px">
+<section class="box">
+<h2>Contratação</h2>
+<div class="f"><label for="d">Descritivo da contratação</label><input id="d" value="[Tenda piramidal com calha]"></div>
+<div class="row2">
+<div class="f"><label for="fo">Fornecedor</label><select id="fo"><option>[Fornecedor A]</option><option>+ Cadastrar fornecedor</option></select></div>
+<div class="f"><label for="re">Responsável</label><select id="re"><option>[Nome]</option></select></div>
+</div>
+<div class="f"><label for="ob">Observação</label><textarea id="ob">[Montagem até D-7, entrada pelo portão 2]</textarea></div>
+</section>
+<section class="box">
+<h2>Quantidade e valor</h2>
+<div class="row2">
+<div class="f"><label for="q">Quantidade</label><input id="q" class="calc" value="450" readonly><span class="muted" style="font-size:12px">calculada pela memória</span></div>
+<div class="f"><label for="u">Unidade</label><select id="u"><option>M²</option><option>ML</option><option>UND</option><option>PCT</option></select></div>
+<div class="f"><label for="fr">Frequência (diárias)</label><input id="fr" type="number" value="1"></div>
+</div>
+<div class="f"><label for="vu">Valor unitário</label><input id="vu" inputmode="decimal" value="[R$ 0,00]"></div>
+<div class="total"><span class="muted">450 × 1 × [R$]</span><b>[R$ total]</b></div>
+</section>
+</div>
+<div style="display:flex;flex-direction:column;gap:16px">
+<section class="box">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>Memória de cálculo</h2><a class="btn btn2 sm" href="GradilTendas.html">Editar</a></div>
+<div class="line"><span>Entrada principal · 3 × 10×10</span><b>300 m²</b></div>
+<div class="line"><span>Praça de alimentação · 6 × 5×5</span><b>150 m²</b></div>
+<div class="line"><span class="muted">Total</span><b>450 m²</b></div>
+</section>
+<section class="box">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>Parcelas</h2><a class="btn btn2 sm" href="Pagamentos.html">+ Parcela</a></div>
+<div class="line"><span>1/2 · Sinal 50% · D-15</span><span class="tag bad">Atrasada</span></div>
+<div class="line"><span>2/2 · Pós-evento 50% · D+5</span><span class="tag">Prevista</span></div>
+<div class="line"><span class="muted">Programado [R$] de [R$]</span><span class="tag ok">100%</span></div>
+</section>
+<section class="box">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>No cronograma</h2><a class="btn btn2 sm" href="Cronograma.html">Ver</a></div>
+<div class="line"><span>Montagem</span><b>D-9 a D-7</b></div>
+<div class="line"><span>Desmontagem</span><b>D+1</b></div>
+</section>
+<section class="box">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>Anexos</h2><a class="btn btn2 sm" href="javascript:void(0)">+ Arquivo</a></div>
+<div class="line"><span>Orçamento_[fornecedor].pdf</span><span class="muted">[dd/mm]</span></div>
+<div class="line"><span>Contrato_assinado.pdf</span><span class="muted">[dd/mm]</span></div>
+</section>
+</div>
+</div>
+</div>
+<div class="foot"><a class="btn btn2" href="Planilha.html">Cancelar</a><a class="btn" href="Planilha.html">Salvar</a></div>
+</div>
+
+
+<script>
+(function(){
+var m=document.querySelector('.dc-modal');
+document.querySelectorAll('[data-act]').forEach(function(b){b.addEventListener('click',function(){if(m)m.hidden=b.getAttribute('data-act')!=='open';calc();});});
+function n(id){var e=document.getElementById(id);if(!e)return 0;var x=parseFloat(String(e.value).replace(',','.'));return isNaN(x)?0:x;}
+function fm(x){return 'R$ '+x.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+var fx=document.querySelector('.fx'),vx=document.querySelector('.vx'),kind=document.body.getAttribute('data-calc');
+function calc(){
+ if(!kind)return; var it=document.getElementById('m1').value;
+ if(kind==='piso'){var F=it==='Fechamento';var ar=document.getElementById('m7'),ml=document.getElementById('m8');
+  ar.disabled=F;ml.disabled=!F; if(!F&&!ar.dataset.touched)ar.value=n('m4')*n('m5')*n('m6'); if(F)ar.value='';
+  var v=F?n('m9')*n('m8'):n('m9')*n('m7'); fx.textContent=F?'Valor = valor unitário × metragem linear':'Valor = valor unitário × área M²'; vx.textContent=fm(v);}
+ if(kind==='gradil'){var q=n('m4'),l=n('m5'),c=n('m6'),vu=n('m11');var t=it==='Tenda'?q*l*c:null,lo=it==='Fechamento em lona'?q*l*2.7:null,g=it==='Gradil'?q*2:null;
+  document.getElementById('m7').value=t==null?'':t;document.getElementById('m8').value=lo==null?'':lo.toLocaleString('pt-BR');document.getElementById('m9').value=g==null?'':g;
+  var v=q*vu,f='Valor total = quantidade × valor unitário';if(lo!=null){v=lo*vu;f='Valor total = lonas M² × valor unitário';}if(g!=null){v=g*vu;f='Valor total = gradil ML × valor unitário';}fx.textContent=f;vx.textContent=fm(v);}
+}
+document.addEventListener('input',function(e){if(e.target.id==='m7')e.target.dataset.touched=1;calc();});
+document.addEventListener('change',calc);calc();
+})();
+</script>
+<style>
+#cmt-btn{position:fixed;right:16px;bottom:16px;z-index:50;display:none;align-items:center;gap:8px;height:48px;padding:0 18px;border-radius:99px;border:0;background:var(--xf1613a);color:var(--x1c1922);font:600 15px Inter,system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.45);cursor:pointer}
+#cmt-btn.on{background:var(--x6b3e92);color:var(--on-p)}
+#cmt-tip{position:fixed;left:50%;transform:translateX(-50%);bottom:76px;z-index:50;display:none;background:var(--x26222e);color:var(--xf3f3f3);border:1px solid var(--x4a4256);border-radius:10px;padding:10px 14px;font:14px Inter,system-ui,sans-serif;max-width:calc(100vw - 32px);text-align:center}
+.cmt-pick *{cursor:crosshair!important}
+.cmt-hover{outline:2px solid var(--xf1613a)!important;outline-offset:2px}
+</style>
+<button id="cmt-btn" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Comentar</span></button>
+<div id="cmt-tip" role="status">Toque no elemento que quer comentar · Esc cancela</div>
+<script>
+(function(){
+  var btn=document.getElementById('cmt-btn'),tip=document.getElementById('cmt-tip'),on=false,last=null,api=null;
+  function set(v){on=v;btn.classList.toggle('on',v);btn.setAttribute('aria-pressed',v);btn.querySelector('span').textContent=v?'Cancelar':'Comentar';tip.style.display=v?'block':'none';document.documentElement.classList.toggle('cmt-pick',v);if(!v&&last){last.classList.remove('cmt-hover');last=null;}}
+  btn.addEventListener('click',function(e){e.stopPropagation();set(!on);});
+  document.addEventListener('mouseover',function(e){if(!on||btn.contains(e.target))return;if(last)last.classList.remove('cmt-hover');last=e.target;last.classList.add('cmt-hover');},true);
+  document.addEventListener('click',function(e){
+    if(!on||btn.contains(e.target))return;
+    e.preventDefault();e.stopPropagation();
+    var el=e.target;set(false);
+    api.openComposer({element:el}).then(function(r){if(r&&r.opened===false){tip.textContent='Não foi possível abrir o comentário agora. Tente de novo.';tip.style.display='block';setTimeout(function(){tip.style.display='none';tip.textContent='Toque no elemento que quer comentar · Esc cancela';},2500);}}).catch(function(){});
+  },true);
+  document.addEventListener('keydown',function(e){if(on&&e.key==='Escape')set(false);});
+  if(window.claude&&window.claude.use){window.claude.use('comments').then(function(c){if(c){api=c;btn.style.display='inline-flex';}});}
+})();
+</script>
+</body>
+</html>

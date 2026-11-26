@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cadastros · Fornecedores</title>
+
+<link rel="stylesheet" href="tema.css">
+<script src="tema.js"></script>
+</head>
+<body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--x1c1c1c);background:var(--xf4f4f2)}
+a{color:var(--x1c1c1c)}a:hover{color:var(--x000)}
+.app{display:flex;flex-wrap:wrap;min-height:900px}
+.side{flex:1 1 220px;background:var(--x1c1c1c);color:var(--xe8e8e6);padding:20px 14px;display:flex;flex-direction:column;gap:2px}
+.side a{display:block;padding:10px 12px;border-radius:8px;color:var(--xc9c9c4);text-decoration:none;font-size:14px}
+.side a:hover{background:var(--x2a2a2a);color:var(--xfff)}.side a.on{background:var(--x3a3a38);color:var(--xfff);font-weight:600}
+.sec{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--xa3a39e);padding:16px 12px 6px}
+.main{flex:999 1 560px;min-width:0;padding:28px 32px;display:flex;flex-direction:column;gap:18px;box-sizing:border-box}
+.box{background:var(--xfff);border:1px solid var(--xd9d9d4);border-radius:10px;padding:16px}
+.muted{color:var(--x5c5c58);font-size:13px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:var(--x5c5c58);font-weight:600;border-bottom:1px solid var(--xd9d9d4);padding:8px;white-space:nowrap}
+td{padding:8px;border-bottom:1px solid var(--xecece9);white-space:nowrap}
+tr.sel td{background:var(--xeef3fb)}
+.num{text-align:right}
+.btn{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--x1c1c1c);background:var(--x1c1c1c);color:var(--xfff);font:inherit;font-size:14px;text-decoration:none}
+.btn2{background:var(--xfff);color:var(--x1c1c1c);border-color:var(--xc4c4bf)}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--xd9d9d4)}
+.tabs a{padding:10px 14px;text-decoration:none;font-size:14px;color:var(--x5c5c58);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs a.on{color:var(--x1c1c1c);font-weight:600;border-bottom-color:var(--x1c1c1c)}
+label{font-size:13px;font-weight:600}
+input,select{height:40px;border:1px solid var(--xc4c4bf);border-radius:8px;padding:0 12px;font:inherit;font-size:14px;background:var(--xfff);box-sizing:border-box;width:100%}
+.f{display:flex;flex-direction:column;gap:6px}
+h1{margin:0;font-size:24px}h2{margin:0;font-size:16px}
+body{background:var(--x121016);color:var(--xf3f3f3)}
+a{color:var(--xd2b4f5)}a:hover{color:var(--xfff)}
+.side{background:var(--x0c0a0f);border-right:1px solid var(--x2a2532)}
+.side>div:first-child{color:var(--xf1613a)!important}
+.side a{color:var(--xb3adbd)}.side a:hover{background:var(--x1f1b26);color:var(--xf3f3f3)}
+.side a.on{background:var(--x6b3e92);color:var(--on-p)}
+.sec{color:var(--x8d8698)}
+.box{background:var(--x1c1922);border-color:var(--x352f40);color:var(--xf3f3f3)}
+.muted,th{color:var(--xb3adbd)}
+th{border-bottom-color:var(--x352f40)}
+td{border-bottom-color:var(--x2a2532)}
+tr.sel td{background:var(--x2e2340)}
+.btn{background:var(--x6b3e92);border-color:var(--x6b3e92);color:var(--on-p)}
+.btn2{background:transparent;color:var(--xf3f3f3);border-color:var(--x4a4256)}
+.tabs{border-bottom-color:var(--x352f40)}.tabs a{color:var(--xb3adbd)}.tabs a.on{color:var(--xf3f3f3);border-bottom-color:var(--xf1613a)}
+input,select{background:var(--x121016);color:var(--xf3f3f3);border-color:var(--x4a4256)}
+label{color:var(--xf3f3f3)}
+@media (max-width:760px){
+.app{flex-direction:column}
+.side{flex:0 0 auto;flex-direction:row;align-items:center;gap:4px;padding:10px 12px;overflow-x:auto;position:sticky;top:0;z-index:5;border-right:0;border-bottom:1px solid var(--x2a2532)}
+.side>div:first-child{padding:0 8px 0 0!important;flex:0 0 auto}
+.side .sec,.side>div[style*="flex-grow"]{display:none}
+.side a{flex:0 0 auto;white-space:nowrap}
+.main{padding:16px;gap:14px}
+.tabs{flex-wrap:nowrap;overflow-x:auto}
+.tabs a{white-space:nowrap;padding:12px}
+h1{font-size:20px}
+.btn{height:44px}
+}
+</style>
+
+<div class="app">
+<nav class="side" aria-label="Menu principal">
+<div style="font-weight:700;font-size:18px;padding:4px 12px 16px;color:var(--xfff)">backstage</div>
+<a href="Main.html">Painel</a>
+<a href="Eventos.html">Eventos</a>
+<div class="sec">Empresa</div>
+<a href="Estoque.html">Estoque</a>
+<a class="on" href="Cadastros.html">Cadastros</a>
+<div class="sec">Projeto</div>
+<a href="Banco.html">Mapa do banco</a>
+<div style="flex-grow:1"></div>
+<a href="index.html">Sair · [Usuário]</a>
+</nav>
+<main class="main">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center">
+<h1>Cadastros</h1>
+<a class="btn" href="javascript:void(0)">+ Fornecedor</a>
+</div>
+<nav class="tabs" aria-label="Tipos de cadastro">
+<a class="on" href="Cadastros.html">Fornecedores</a><a href="javascript:void(0)">Catálogo de itens</a><a href="javascript:void(0)">Hotéis</a><a href="javascript:void(0)">Usuários</a>
+</nav>
+<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start">
+<section class="box" style="flex:3 1 480px;min-width:0;padding:0">
+<div style="padding:12px 16px"><input aria-label="Buscar fornecedor" placeholder="Buscar por nome, CNPJ ou categoria"></div>
+<div class="tw"><table>
+<tr><th>Fornecedor</th><th>Categoria</th><th>Contato</th><th class="num">Eventos</th><th class="num">Em aberto</th></tr>
+<tr class="sel"><td><b>[Fornecedor A]</b></td><td>Tendas e gradil</td><td>[Nome] · [telefone]</td><td class="num">[6]</td><td class="num">[R$]</td></tr>
+<tr><td>[Fornecedor B]</td><td>Som e luz</td><td>[Nome] · [telefone]</td><td class="num">[4]</td><td class="num">[R$]</td></tr>
+<tr><td>[Fornecedor C]</td><td>Banheiros químicos</td><td>[Nome] · [telefone]</td><td class="num">[9]</td><td class="num">[R$ 0]</td></tr>
+<tr><td>[Fornecedor D]</td><td>Segurança</td><td>[Nome] · [telefone]</td><td class="num">[3]</td><td class="num">[R$]</td></tr>
+</table></div>
+</section>
+<form class="box" style="flex:2 1 320px;min-width:0;display:flex;flex-direction:column;gap:12px">
+<h2>[Fornecedor A]</h2>
+<div class="f"><label for="n">Razão social / nome</label><input id="n" value="[Fornecedor A]"></div>
+<div class="f"><label for="c">CNPJ</label><input id="c" placeholder="00.000.000/0000-00"></div>
+<div class="f"><label for="cat">Categoria</label><select id="cat"><option>Tendas e gradil</option></select></div>
+<div style="display:flex;gap:12px;flex-wrap:wrap"><div class="f" style="flex:1 1 140px"><label for="ct">Contato</label><input id="ct"></div><div class="f" style="flex:1 1 140px"><label for="tel">Telefone</label><input id="tel"></div></div>
+<div class="f"><label for="pix">Chave PIX / dados bancários</label><input id="pix"></div>
+<div class="muted">Histórico: [6] eventos · última contratação [dd/mm/aaaa]</div>
+<div style="display:flex;gap:8px"><a class="btn" href="javascript:void(0)">Salvar</a><a class="btn btn2" href="javascript:void(0)">Cancelar</a></div>
+</form>
+</div>
+</main>
+</div>
+
+
+<script>
+(function(){
+var m=document.querySelector('.dc-modal');
+document.querySelectorAll('[data-act]').forEach(function(b){b.addEventListener('click',function(){if(m)m.hidden=b.getAttribute('data-act')!=='open';calc();});});
+function n(id){var e=document.getElementById(id);if(!e)return 0;var x=parseFloat(String(e.value).replace(',','.'));return isNaN(x)?0:x;}
+function fm(x){return 'R$ '+x.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+var fx=document.querySelector('.fx'),vx=document.querySelector('.vx'),kind=document.body.getAttribute('data-calc');
+function calc(){
+ if(!kind)return; var it=document.getElementById('m1').value;
+ if(kind==='piso'){var F=it==='Fechamento';var ar=document.getElementById('m7'),ml=document.getElementById('m8');
+  ar.disabled=F;ml.disabled=!F; if(!F&&!ar.dataset.touched)ar.value=n('m4')*n('m5')*n('m6'); if(F)ar.value='';
+  var v=F?n('m9')*n('m8'):n('m9')*n('m7'); fx.textContent=F?'Valor = valor unitário × metragem linear':'Valor = valor unitário × área M²'; vx.textContent=fm(v);}
+ if(kind==='gradil'){var q=n('m4'),l=n('m5'),c=n('m6'),vu=n('m11');var t=it==='Tenda'?q*l*c:null,lo=it==='Fechamento em lona'?q*l*2.7:null,g=it==='Gradil'?q*2:null;
+  document.getElementById('m7').value=t==null?'':t;document.getElementById('m8').value=lo==null?'':lo.toLocaleString('pt-BR');document.getElementById('m9').value=g==null?'':g;
+  var v=q*vu,f='Valor total = quantidade × valor unitário';if(lo!=null){v=lo*vu;f='Valor total = lonas M² × valor unitário';}if(g!=null){v=g*vu;f='Valor total = gradil ML × valor unitário';}fx.textContent=f;vx.textContent=fm(v);}
+}
+document.addEventListener('input',function(e){if(e.target.id==='m7')e.target.dataset.touched=1;calc();});
+document.addEventListener('change',calc);calc();
+})();
+</script>
+<style>
+#cmt-btn{position:fixed;right:16px;bottom:16px;z-index:50;display:none;align-items:center;gap:8px;height:48px;padding:0 18px;border-radius:99px;border:0;background:var(--xf1613a);color:var(--x1c1922);font:600 15px Inter,system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.45);cursor:pointer}
+#cmt-btn.on{background:var(--x6b3e92);color:var(--on-p)}
+#cmt-tip{position:fixed;left:50%;transform:translateX(-50%);bottom:76px;z-index:50;display:none;background:var(--x26222e);color:var(--xf3f3f3);border:1px solid var(--x4a4256);border-radius:10px;padding:10px 14px;font:14px Inter,system-ui,sans-serif;max-width:calc(100vw - 32px);text-align:center}
+.cmt-pick *{cursor:crosshair!important}
+.cmt-hover{outline:2px solid var(--xf1613a)!important;outline-offset:2px}
+</style>
+<button id="cmt-btn" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Comentar</span></button>
+<div id="cmt-tip" role="status">Toque no elemento que quer comentar · Esc cancela</div>
+<script>
+(function(){
+  var btn=document.getElementById('cmt-btn'),tip=document.getElementById('cmt-tip'),on=false,last=null,api=null;
+  function set(v){on=v;btn.classList.toggle('on',v);btn.setAttribute('aria-pressed',v);btn.querySelector('span').textContent=v?'Cancelar':'Comentar';tip.style.display=v?'block':'none';document.documentElement.classList.toggle('cmt-pick',v);if(!v&&last){last.classList.remove('cmt-hover');last=null;}}
+  btn.addEventListener('click',function(e){e.stopPropagation();set(!on);});
+  document.addEventListener('mouseover',function(e){if(!on||btn.contains(e.target))return;if(last)last.classList.remove('cmt-hover');last=e.target;last.classList.add('cmt-hover');},true);
+  document.addEventListener('click',function(e){
+    if(!on||btn.contains(e.target))return;
+    e.preventDefault();e.stopPropagation();
+    var el=e.target;set(false);
+    api.openComposer({element:el}).then(function(r){if(r&&r.opened===false){tip.textContent='Não foi possível abrir o comentário agora. Tente de novo.';tip.style.display='block';setTimeout(function(){tip.style.display='none';tip.textContent='Toque no elemento que quer comentar · Esc cancela';},2500);}}).catch(function(){});
+  },true);
+  document.addEventListener('keydown',function(e){if(on&&e.key==='Escape')set(false);});
+  if(window.claude&&window.claude.use){window.claude.use('comments').then(function(c){if(c){api=c;btn.style.display='inline-flex';}});}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; }
+body {
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--link); }
+a:hover { color: #fff; }
+
+/* Botões */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  height: 44px; padding: 0 16px;
+  border-radius: var(--radius); border: 1px solid transparent;
+  font: 600 14px var(--font); text-decoration: none; cursor: pointer;
+}
+.btn-primary { background: var(--primary); color: var(--on-primary); }
+.btn-primary:hover { filter: brightness(1.1); color: var(--on-primary); }
+.btn-ghost { background: transparent; color: var(--text); border-color: var(--border-strong); }
+.btn-ghost:hover { background: var(--surface-2); color: var(--text); }
+.btn:disabled { opacity: .6; cursor: progress; }
+.btn:focus-visible, button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--secondary); outline-offset: 2px;
+}
+
+/* Mensagens */
+.msg { font-size: 13px; line-height: 1.45; border-radius: var(--radius); padding: 10px 12px; }
+.msg[hidden] { display: none; }
+.msg-erro { color: var(--danger); background: rgba(255, 154, 133, .08); border: 1px solid rgba(255, 154, 133, .35); }
+.msg-info { color: var(--muted-2); background: var(--surface-2); border: 1px solid var(--border); }
+
+/* Seletor de tema (login e menu lateral) */
+.tema { display: flex; flex-direction: column; gap: 8px; padding: 12px; margin: 4px 0; border-top: 1px solid var(--border-strong); }
+.tema span { font-size: 11px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); }
+.tema div { display: flex; gap: 6px; }
+.tema button {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+  height: 40px; border-radius: var(--radius); border: 1px solid var(--border-strong);
+  background: transparent; color: var(--text); font: 500 13px var(--font); cursor: pointer;
+}
+.tema button i { width: 12px; height: 12px; border-radius: 99px; }
+.tema button[aria-pressed="true"] { border-color: var(--text); background: var(--surface-2); }

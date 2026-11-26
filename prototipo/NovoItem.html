@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Novo item no catálogo</title>
+
+<link rel="stylesheet" href="tema.css">
+<script src="tema.js"></script>
+</head>
+<body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--xf3f3f3);background:var(--x121016)}
+a{color:var(--xd2b4f5)}a:hover{color:var(--xfff)}
+.wrap{max-width:640px;margin:0 auto;padding:20px 16px 48px;display:flex;flex-direction:column;gap:16px;box-sizing:border-box}
+.muted{color:var(--xb3adbd);font-size:13px}
+.box{background:var(--x1c1922);border:1px solid var(--x352f40);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:14px}
+.f{display:flex;flex-direction:column;gap:6px}
+label{font-size:13px;font-weight:600}
+input,select{height:44px;width:100%;box-sizing:border-box;border:1px solid var(--x4a4256);border-radius:10px;padding:0 12px;font:inherit;font-size:15px;background:var(--x121016);color:var(--xf3f3f3)}
+.opt{display:flex;gap:12px;align-items:flex-start;padding:12px;border:1px solid var(--x352f40);border-radius:10px}
+.opt input{width:20px;height:20px;accent-color:var(--x6b3e92);flex:0 0 auto;margin-top:2px}
+.opt.on{border-color:var(--x6b3e92);background:var(--x1f1830)}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 20px;border-radius:10px;background:var(--x6b3e92);color:var(--on-p);font-weight:600;font-size:15px;text-decoration:none;flex:1}
+.btn2{background:transparent;border:1px solid var(--x4a4256);color:var(--xf3f3f3)}
+h1{margin:0;font-size:22px}h2{margin:0;font-size:16px}
+</style>
+
+<div class="wrap" style="min-height:1700px">
+<a href="ItemCatalogo.html" style="text-decoration:none;font-size:14px">← Catálogo</a>
+<div><h1>Novo item no catálogo</h1><div class="muted">Fica disponível para todos os eventos da EXP.</div></div>
+<section class="box">
+<div class="f"><label for="n">Nome do item</label><input id="n" placeholder="Ex.: Camarim modular"></div>
+<div class="f"><label for="c">Categoria</label><select id="c"><option>Estrutura eventual</option><option>Estrutura geral</option><option>Estrutura bar</option><option>Técnica</option><option>Cenografia</option><option>Maquinário/Serviços</option><option>Staff</option><option>Extras</option></select></div>
+<div class="f"><label for="u">Unidade padrão</label><select id="u"><option>UND</option><option>M²</option><option>ML</option><option>PCT</option><option>Diária</option></select></div>
+</section>
+<section class="box">
+<h2>Como a quantidade é definida?</h2>
+<div class="opt on"><input id="o1" type="radio" name="q" checked><label for="o1" style="display:flex;flex-direction:column;gap:2px"><span>Digitada direto</span><span class="muted" style="font-weight:400">Ex.: 1 gerador, 40 seguranças</span></label></div>
+<div class="opt"><input id="o2" type="radio" name="q"><label for="o2" style="display:flex;flex-direction:column;gap:2px"><span>Calculada por memória de cálculo</span><span class="muted" style="font-weight:400">Escolha o modelo: tenda, piso, box, barricada, LED, forração, banheiro, elétrica</span></label></div>
+<div class="f"><label for="m">Modelo de memória</label><select id="m" disabled><option>—</option></select></div>
+</section>
+<div style="display:flex;gap:10px"><a class="btn btn2" href="ItemCatalogo.html">Cancelar</a><a class="btn" href="ItemCatalogo.html">Salvar item</a></div>
+</div>
+
+
+<script>
+(function(){
+var m=document.querySelector('.dc-modal');
+document.querySelectorAll('[data-act]').forEach(function(b){b.addEventListener('click',function(){if(m)m.hidden=b.getAttribute('data-act')!=='open';calc();});});
+function n(id){var e=document.getElementById(id);if(!e)return 0;var x=parseFloat(String(e.value).replace(',','.'));return isNaN(x)?0:x;}
+function fm(x){return 'R$ '+x.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+var fx=document.querySelector('.fx'),vx=document.querySelector('.vx'),kind=document.body.getAttribute('data-calc');
+function calc(){
+ if(!kind)return; var it=document.getElementById('m1').value;
+ if(kind==='piso'){var F=it==='Fechamento';var ar=document.getElementById('m7'),ml=document.getElementById('m8');
+  ar.disabled=F;ml.disabled=!F; if(!F&&!ar.dataset.touched)ar.value=n('m4')*n('m5')*n('m6'); if(F)ar.value='';
+  var v=F?n('m9')*n('m8'):n('m9')*n('m7'); fx.textContent=F?'Valor = valor unitário × metragem linear':'Valor = valor unitário × área M²'; vx.textContent=fm(v);}
+ if(kind==='gradil'){var q=n('m4'),l=n('m5'),c=n('m6'),vu=n('m11');var t=it==='Tenda'?q*l*c:null,lo=it==='Fechamento em lona'?q*l*2.7:null,g=it==='Gradil'?q*2:null;
+  document.getElementById('m7').value=t==null?'':t;document.getElementById('m8').value=lo==null?'':lo.toLocaleString('pt-BR');document.getElementById('m9').value=g==null?'':g;
+  var v=q*vu,f='Valor total = quantidade × valor unitário';if(lo!=null){v=lo*vu;f='Valor total = lonas M² × valor unitário';}if(g!=null){v=g*vu;f='Valor total = gradil ML × valor unitário';}fx.textContent=f;vx.textContent=fm(v);}
+}
+document.addEventListener('input',function(e){if(e.target.id==='m7')e.target.dataset.touched=1;calc();});
+document.addEventListener('change',calc);calc();
+})();
+</script>
+<style>
+#cmt-btn{position:fixed;right:16px;bottom:16px;z-index:50;display:none;align-items:center;gap:8px;height:48px;padding:0 18px;border-radius:99px;border:0;background:var(--xf1613a);color:var(--x1c1922);font:600 15px Inter,system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.45);cursor:pointer}
+#cmt-btn.on{background:var(--x6b3e92);color:var(--on-p)}
+#cmt-tip{position:fixed;left:50%;transform:translateX(-50%);bottom:76px;z-index:50;display:none;background:var(--x26222e);color:var(--xf3f3f3);border:1px solid var(--x4a4256);border-radius:10px;padding:10px 14px;font:14px Inter,system-ui,sans-serif;max-width:calc(100vw - 32px);text-align:center}
+.cmt-pick *{cursor:crosshair!important}
+.cmt-hover{outline:2px solid var(--xf1613a)!important;outline-offset:2px}
+</style>
+<button id="cmt-btn" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Comentar</span></button>
+<div id="cmt-tip" role="status">Toque no elemento que quer comentar · Esc cancela</div>
+<script>
+(function(){
+  var btn=document.getElementById('cmt-btn'),tip=document.getElementById('cmt-tip'),on=false,last=null,api=null;
+  function set(v){on=v;btn.classList.toggle('on',v);btn.setAttribute('aria-pressed',v);btn.querySelector('span').textContent=v?'Cancelar':'Comentar';tip.style.display=v?'block':'none';document.documentElement.classList.toggle('cmt-pick',v);if(!v&&last){last.classList.remove('cmt-hover');last=null;}}
+  btn.addEventListener('click',function(e){e.stopPropagation();set(!on);});
+  document.addEventListener('mouseover',function(e){if(!on||btn.contains(e.target))return;if(last)last.classList.remove('cmt-hover');last=e.target;last.classList.add('cmt-hover');},true);
+  document.addEventListener('click',function(e){
+    if(!on||btn.contains(e.target))return;
+    e.preventDefault();e.stopPropagation();
+    var el=e.target;set(false);
+    api.openComposer({element:el}).then(function(r){if(r&&r.opened===false){tip.textContent='Não foi possível abrir o comentário agora. Tente de novo.';tip.style.display='block';setTimeout(function(){tip.style.display='none';tip.textContent='Toque no elemento que quer comentar · Esc cancela';},2500);}}).catch(function(){});
+  },true);
+  document.addEventListener('keydown',function(e){if(on&&e.key==='Escape')set(false);});
+  if(window.claude&&window.claude.use){window.claude.use('comments').then(function(c){if(c){api=c;btn.style.display='inline-flex';}});}
+})();
+</script>
+</body>
+</html>

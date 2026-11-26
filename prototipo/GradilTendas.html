@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Gradil e tendas</title>
+
+<link rel="stylesheet" href="tema.css">
+<script src="tema.js"></script>
+</head>
+<body data-calc="gradil">
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--xf3f3f3);background:var(--x121016)}
+a{color:var(--xd2b4f5)}a:hover{color:var(--xfff)}
+.app{display:flex;min-height:1000px}
+.side{flex:0 0 232px;background:var(--x0c0a0f);border-right:1px solid var(--x2a2532);padding:20px 14px;display:flex;flex-direction:column;gap:2px;box-sizing:border-box}
+.brand{font-weight:700;font-size:18px;padding:4px 12px 16px;color:var(--xf1613a)}
+.side a{display:block;padding:10px 12px;border-radius:8px;color:var(--xb3adbd);text-decoration:none;font-size:14px}
+.side a:hover{background:var(--x1f1b26);color:var(--xf3f3f3)}
+.side a.par{color:var(--xf3f3f3);font-weight:600}
+.sub{display:flex;flex-direction:column;gap:2px;margin:2px 0 6px 12px;padding-left:10px;border-left:1px solid var(--x352f40)}
+.sub .ev{font-size:12px;color:var(--x8d8698);padding:6px 12px 2px}
+.side .sub a{padding:8px 12px;font-size:13px}
+.side .sub a.on{background:var(--x2e2340);color:var(--xfff);box-shadow:inset 3px 0 0 var(--xf1613a)}
+.sub2{display:flex;flex-direction:column;gap:1px;margin:2px 0 4px 12px;padding-left:8px;border-left:1px dashed var(--x4a4256)}
+.side .sub2 a{padding:6px 10px;font-size:12.5px;color:var(--xa39cae)}
+.side .sub2 a:hover{color:var(--xf3f3f3)}
+.side .sub2 a.on{color:var(--xfff);background:var(--x2e2340);box-shadow:inset 3px 0 0 var(--xf1613a)}
+.side .sub a.par2{color:var(--xf3f3f3);font-weight:600}
+.sec{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--x8d8698);padding:16px 12px 6px}
+.main{flex:1;min-width:0;padding:28px 32px;display:flex;flex-direction:column;gap:18px;box-sizing:border-box}
+.muted{color:var(--xb3adbd);font-size:13px}
+.box{background:var(--x1c1922);border:1px solid var(--x352f40);border-radius:12px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:99px;border:1px solid var(--x4a4256);color:var(--xd6d1dd);font-size:13px;text-decoration:none}
+.chip.on{background:var(--x6b3e92);border-color:var(--x6b3e92);color:var(--on-p)}
+.btn{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--x6b3e92);background:var(--x6b3e92);color:var(--on-p);font:inherit;font-size:14px;font-weight:600;text-decoration:none;cursor:pointer}
+.btn2{background:transparent;color:var(--xf3f3f3);border-color:var(--x4a4256);font-weight:500}
+.res{display:flex;flex-wrap:wrap;gap:32px;align-items:center;padding:16px 20px;border-left:4px solid var(--xf1613a)}
+.res b{font-size:24px;display:block}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:var(--xb3adbd);font-weight:600;padding:10px 8px;border-bottom:1px solid var(--x352f40);white-space:nowrap}
+td{border-bottom:1px solid var(--x2a2532);border-right:1px solid var(--x2a2532);padding:0;height:38px;white-space:nowrap}
+td:last-child{border-right:0}
+td.c input,td.c select{width:100%;min-width:56px;height:38px;box-sizing:border-box;border:0;background:transparent;color:var(--xf3f3f3);font:inherit;font-size:13px;padding:0 8px}
+td.c input:focus,td.c select:focus{outline:2px solid var(--x6b3e92);outline-offset:-2px;background:var(--x1f1830)}
+td.c select{background:var(--x1a1720)}
+td.a{background:var(--x1f1830);color:var(--xd2b4f5);padding:0 8px;font-weight:600}
+td.x{background:var(--x16141a);color:var(--x5f5970);padding:0 8px}
+td.r,th.r{text-align:right}td.c.r input{text-align:right}
+tr.new td{background:var(--x141218)}
+tr.new input::placeholder{color:var(--x6f6880)}
+tr.tot td{background:var(--x26222e);font-weight:700;padding:0 8px}
+td.del{width:36px;text-align:center}
+td.del button{border:0;background:transparent;color:var(--x8d8698);font-size:16px;cursor:pointer;width:36px;height:36px}
+.lg{display:flex;gap:18px;flex-wrap:wrap;font-size:12px;color:var(--xb3adbd);align-items:center}
+.lg i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:middle;margin-right:6px}
+.ov{position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(8,6,12,.72);display:flex;align-items:center;justify-content:center;z-index:20;padding:24px}
+.md{width:100%;max-width:680px;background:var(--x1c1922);border:1px solid var(--x4a4256);border-radius:16px;padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 60px rgba(0,0,0,.6);box-sizing:border-box}
+.g2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.f{display:flex;flex-direction:column;gap:6px}
+.f label{font-size:13px;font-weight:600}
+.f input,.f select{height:42px;border:1px solid var(--x4a4256);border-radius:8px;padding:0 12px;font:inherit;font-size:14px;background:var(--x121016);color:var(--xf3f3f3)}
+.f .auto{border-color:var(--x6b3e92);background:var(--x1f1830);color:var(--xd2b4f5)}
+.f .auto:disabled{opacity:1}
+.calc{background:var(--x1f1830);border-radius:10px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;font-size:14px;gap:12px}
+.calc b{font-size:20px}
+.rule{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.rule div{background:var(--x1c1922);border:1px solid var(--x352f40);border-radius:10px;padding:12px 14px;font-size:13px;color:var(--xd6d1dd)}
+h1{margin:0;font-size:24px}h2{margin:0;font-size:18px}
+.side .sub .off,.tabs .off{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--x5f5970);cursor:not-allowed;font-size:13px;padding:8px 12px}
+.tabs .off{padding:10px 14px;font-size:14px;display:inline-flex}
+.off em{font-style:normal;font-size:11px;border:1px solid var(--x352f40);border-radius:99px;padding:1px 7px;color:var(--x8d8698)}
+</style>
+
+<div class="app">
+<nav class="side" aria-label="Menu principal">
+<div class="brand">backstage</div>
+<a href="Main.html">Painel</a>
+<a class="par" href="Eventos.html">Eventos</a>
+<div class="sub"><div class="ev">[Evento A]</div><a href="EventoGeral.html">Visão geral</a><a class="par2" href="Planilha.html">Planilha de trabalho</a><div class="sub2"><a href="ComVisual.html">Comunicação visual</a><a href="Forracao.html">Forração</a><a href="Cenografia.html">Cenografia geral</a><a href="PisoFechamentos.html">Piso e fechamentos</a><a class="on" href="GradilTendas.html">Gradil e tendas</a><a href="Banheiros.html">Banheiros químicos</a><a href="Barricadas.html">Barricadas</a><a href="PainelLed.html">Painel de LED</a><a href="MesasCadeiras.html">Mesas e cadeiras</a><a href="Mobilia.html">Mobília</a></div><a href="Cronograma.html">Cronograma</a><a href="Atracoes.html">Artístico</a><a href="Documentacao.html">Documentação</a><span class="off" aria-disabled="true" title="Desabilitado por enquanto">Pagamentos <em>em breve</em></span></div>
+<div class="sec">Empresa</div>
+<a href="Estoque.html">Estoque</a>
+<a href="Cadastros.html">Cadastros</a>
+<div class="sec">Projeto</div>
+<a href="Banco.html">Mapa do banco</a>
+<div style="flex-grow:1"></div>
+<a href="index.html">Sair · [Usuário]</a>
+</nav>
+<main class="main">
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap">
+<div><div class="muted"><a href="Eventos.html">Eventos</a> / [Evento A] / <a href="Planilha.html">Planilha de trabalho</a></div><h1>Gradil e tendas</h1></div>
+<button class="btn" type="button" data-act="open">+ Novo item</button>
+</div>
+<section class="box res">
+<div><span class="muted">Vai para a planilha de trabalho</span><b>[R$ 0,00]</b></div>
+<div><span class="muted">Tendas</span><b style="font-size:16px">450 m²</b></div>
+<div><span class="muted">Fechamento em lona</span><b style="font-size:16px">108 m²</b></div>
+<div><span class="muted">Gradil</span><b style="font-size:16px">160 ML</b></div>
+<div><span class="muted">Itens na planilha</span><b style="font-size:16px">Tendas · Lonas · Gradil</b></div>
+</section>
+<section class="box" style="padding:0;overflow:hidden">
+<div class="tw"><table>
+<tr><th>Item</th><th>Posicionamento</th><th>Estilo</th><th class="r">Qtd</th><th class="r">Largura (ML)</th><th class="r">Compr. (ML)</th><th class="r">Altura</th><th class="r">Tendas (M²)</th><th class="r">Lonas (M²)</th><th class="r">Gradil (ML)</th><th class="r">Valor unit.</th><th class="r">Valor total</th><th></th></tr>
+<tr><td class="c"><select aria-label="Item"><option selected>Tenda</option><option>Balcão</option><option>Gradil</option><option>Fechamento em lona</option></select></td><td class="c"><input value="Entrada principal" aria-label="Posicionamento"></td><td class="c"><select aria-label="Estilo"><option>Tubular</option><option>Balcão</option><option>Gradil</option><option>Lona</option><option selected>Calhada</option><option>Arco</option><option>Avance</option></select></td><td class="c r"><input value="3" aria-label="Quantidade"></td><td class="c r"><input value="10" aria-label="Largura"></td><td class="c r"><input value="10" aria-label="Comprimento"></td><td class="c r"><input value="3,00" aria-label="Altura"></td><td class="a r">300</td><td class="x r"></td><td class="x r"></td><td class="c r"><input value="[R$]" aria-label="Valor unitário"></td><td class="a r">[R$]</td><td class="del"><button type="button" aria-label="Excluir linha">×</button></td></tr>
+<tr><td class="c"><select aria-label="Item"><option selected>Tenda</option><option>Balcão</option><option>Gradil</option><option>Fechamento em lona</option></select></td><td class="c"><input value="Praça de alimentação" aria-label="Posicionamento"></td><td class="c"><select aria-label="Estilo"><option selected>Tubular</option><option>Balcão</option><option>Gradil</option><option>Lona</option><option>Calhada</option><option>Arco</option><option>Avance</option></select></td><td class="c r"><input value="6" aria-label="Quantidade"></td><td class="c r"><input value="5" aria-label="Largura"></td><td class="c r"><input value="5" aria-label="Comprimento"></td><td class="c r"><input value="3,00" aria-label="Altura"></td><td class="a r">150</td><td class="x r"></td><td class="x r"></td><td class="c r"><input value="[R$]" aria-label="Valor unitário"></td><td class="a r">[R$]</td><td class="del"><button type="button" aria-label="Excluir linha">×</button></td></tr>
+<tr><td class="c"><select aria-label="Item"><option>Tenda</option><option>Balcão</option><option>Gradil</option><option selected>Fechamento em lona</option></select></td><td class="c"><input value="Camarim" aria-label="Posicionamento"></td><td class="c"><select aria-label="Estilo"><option>Tubular</option><option>Balcão</option><option>Gradil</option><option selected>Lona</option><option>Calhada</option><option>Arco</option><option>Avance</option></select></td><td class="c r"><input value="4" aria-label="Quantidade"></td><td class="c r"><input value="10" aria-label="Largura"></td><td class="c r"><input value="—" aria-label="Comprimento"></td><td class="c r"><input value="2,70" aria-label="Altura"></td><td class="x r"></td><td class="a r">108</td><td class="x r"></td><td class="c r"><input value="[R$]" aria-label="Valor unitário"></td><td class="a r">[R$]</td><td class="del"><button type="button" aria-label="Excluir linha">×</button></td></tr>
+<tr><td class="c"><select aria-label="Item"><option>Tenda</option><option>Balcão</option><option selected>Gradil</option><option>Fechamento em lona</option></select></td><td class="c"><input value="Pista" aria-label="Posicionamento"></td><td class="c"><select aria-label="Estilo"><option>Tubular</option><option>Balcão</option><option selected>Gradil</option><option>Lona</option><option>Calhada</option><option>Arco</option><option>Avance</option></select></td><td class="c r"><input value="80" aria-label="Quantidade"></td><td class="c r"><input value="—" aria-label="Largura"></td><td class="c r"><input value="—" aria-label="Comprimento"></td><td class="c r"><input value="—" aria-label="Altura"></td><td class="x r"></td><td class="x r"></td><td class="a r">160</td><td class="c r"><input value="[R$]" aria-label="Valor unitário"></td><td class="a r">[R$]</td><td class="del"><button type="button" aria-label="Excluir linha">×</button></td></tr>
+<tr><td class="c"><select aria-label="Item"><option>Tenda</option><option selected>Balcão</option><option>Gradil</option><option>Fechamento em lona</option></select></td><td class="c"><input value="Bar 1" aria-label="Posicionamento"></td><td class="c"><select aria-label="Estilo"><option>Tubular</option><option selected>Balcão</option><option>Gradil</option><option>Lona</option><option>Calhada</option><option>Arco</option><option>Avance</option></select></td><td class="c r"><input value="2" aria-label="Quantidade"></td><td class="c r"><input value="—" aria-label="Largura"></td><td class="c r"><input value="—" aria-label="Comprimento"></td><td class="c r"><input value="—" aria-label="Altura"></td><td class="x r"></td><td class="x r"></td><td class="x r"></td><td class="c r"><input value="[R$]" aria-label="Valor unitário"></td><td class="a r">[R$]</td><td class="del"><button type="button" aria-label="Excluir linha">×</button></td></tr>
+<tr class="new"><td class="c"><select aria-label="Novo item"><option>+ Escolha o item…</option><option>Tenda</option><option>Balcão</option><option>Gradil</option><option>Fechamento em lona</option></select></td><td class="c"><input placeholder="Posicionamento" aria-label="Posicionamento"></td><td class="c"><select aria-label="Estilo"><option>Estilo…</option><option>Tubular</option><option>Balcão</option><option>Gradil</option><option>Lona</option><option>Calhada</option><option>Arco</option><option>Avance</option></select></td><td class="c r"><input placeholder="1" aria-label="Quantidade"></td><td class="c r"><input placeholder="0" aria-label="Largura"></td><td class="c r"><input placeholder="0" aria-label="Comprimento"></td><td class="c r"><input placeholder="0,00" aria-label="Altura"></td><td class="x r"></td><td class="x r"></td><td class="x r"></td><td class="c r"><input placeholder="R$" aria-label="Valor unitário"></td><td class="a r">—</td><td></td></tr>
+<tr class="tot"><td colspan="7">Total</td><td class="r">450</td><td class="r">108</td><td class="r">160</td><td></td><td class="r">[R$ 0,00]</td><td></td></tr>
+</table></div>
+</section>
+<div class="rule">
+<div><b style="color:var(--xf3f3f3)">Tendas (M²)</b> só para Tenda: qtd × largura × comprimento.</div>
+<div><b style="color:var(--xf3f3f3)">Lonas (M²)</b> só para Fechamento em lona: qtd × largura × 2,70.</div>
+<div><b style="color:var(--xf3f3f3)">Gradil (ML)</b> só para Gradil: qtd × 2. As três colunas nunca são editáveis.</div>
+</div>
+<div class="lg"><span><i style="background:var(--x1f1830);border:1px solid var(--x6b3e92)"></i>Calculado</span><span><i style="background:var(--x16141a);border:1px solid var(--x352f40)"></i>Em branco para este item</span><span>Valor total: Tenda e Balcão = qtd × unit. · Lona = M² × unit. · Gradil = ML × unit.</span></div>
+</main>
+</div>
+<div class="dc-modal" hidden>
+<div class="ov"><div class="md" role="dialog" aria-label="Novo item de gradil e tendas">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>Novo item · Gradil e tendas</h2><button class="btn btn2" type="button" data-act="close" aria-label="Fechar">×</button></div>
+<div class="g2">
+<div class="f"><label for="m1">Item</label><select id="m1" value=""><option>Tenda</option><option>Balcão</option><option>Gradil</option><option>Fechamento em lona</option></select></div>
+<div class="f"><label for="m2">Estilo</label><select id="m2"><option>Tubular</option><option>Balcão</option><option>Gradil</option><option>Lona</option><option>Calhada</option><option>Arco</option><option>Avance</option></select></div>
+<div class="f"><label for="m3">Posicionamento</label><input id="m3" placeholder="Ex.: Área VIP"></div>
+<div class="f"><label for="m4">Quantidade</label><input id="m4" type="number" value="2"></div>
+<div class="f"><label for="m5">Largura (ML)</label><input id="m5" type="number" value="10"></div>
+<div class="f"><label for="m6">Comprimento (ML)</label><input id="m6" type="number" value="5"></div>
+<div class="f"><label for="m7">Tendas (M²)</label><input id="m7" class="auto" value="" disabled></div>
+<div class="f"><label for="m8">Lonas (M²)</label><input id="m8" class="auto" value="" disabled></div>
+<div class="f"><label for="m9">Gradil (ML)</label><input id="m9" class="auto" value="" disabled></div>
+<div class="f"><label for="m10">Altura (m)</label><input id="m10" placeholder="0,00"></div>
+<div class="f"><label for="m11">Valor unitário (R$)</label><input id="m11" type="number" value="800"></div>
+</div>
+<div class="calc"><span class="muted"><span class="fx"></span></span><b><span class="vx"></span></b></div>
+<div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn btn2" type="button" data-act="close">Cancelar</button><button class="btn" type="button" data-act="close">Adicionar item</button></div>
+</div></div>
+</div>
+
+
+<script>
+(function(){
+var m=document.querySelector('.dc-modal');
+document.querySelectorAll('[data-act]').forEach(function(b){b.addEventListener('click',function(){if(m)m.hidden=b.getAttribute('data-act')!=='open';calc();});});
+function n(id){var e=document.getElementById(id);if(!e)return 0;var x=parseFloat(String(e.value).replace(',','.'));return isNaN(x)?0:x;}
+function fm(x){return 'R$ '+x.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+var fx=document.querySelector('.fx'),vx=document.querySelector('.vx'),kind=document.body.getAttribute('data-calc');
+function calc(){
+ if(!kind)return; var it=document.getElementById('m1').value;
+ if(kind==='piso'){var F=it==='Fechamento';var ar=document.getElementById('m7'),ml=document.getElementById('m8');
+  ar.disabled=F;ml.disabled=!F; if(!F&&!ar.dataset.touched)ar.value=n('m4')*n('m5')*n('m6'); if(F)ar.value='';
+  var v=F?n('m9')*n('m8'):n('m9')*n('m7'); fx.textContent=F?'Valor = valor unitário × metragem linear':'Valor = valor unitário × área M²'; vx.textContent=fm(v);}
+ if(kind==='gradil'){var q=n('m4'),l=n('m5'),c=n('m6'),vu=n('m11');var t=it==='Tenda'?q*l*c:null,lo=it==='Fechamento em lona'?q*l*2.7:null,g=it==='Gradil'?q*2:null;
+  document.getElementById('m7').value=t==null?'':t;document.getElementById('m8').value=lo==null?'':lo.toLocaleString('pt-BR');document.getElementById('m9').value=g==null?'':g;
+  var v=q*vu,f='Valor total = quantidade × valor unitário';if(lo!=null){v=lo*vu;f='Valor total = lonas M² × valor unitário';}if(g!=null){v=g*vu;f='Valor total = gradil ML × valor unitário';}fx.textContent=f;vx.textContent=fm(v);}
+}
+document.addEventListener('input',function(e){if(e.target.id==='m7')e.target.dataset.touched=1;calc();});
+document.addEventListener('change',calc);calc();
+})();
+</script>
+<style>
+#cmt-btn{position:fixed;right:16px;bottom:16px;z-index:50;display:none;align-items:center;gap:8px;height:48px;padding:0 18px;border-radius:99px;border:0;background:var(--xf1613a);color:var(--x1c1922);font:600 15px Inter,system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.45);cursor:pointer}
+#cmt-btn.on{background:var(--x6b3e92);color:var(--on-p)}
+#cmt-tip{position:fixed;left:50%;transform:translateX(-50%);bottom:76px;z-index:50;display:none;background:var(--x26222e);color:var(--xf3f3f3);border:1px solid var(--x4a4256);border-radius:10px;padding:10px 14px;font:14px Inter,system-ui,sans-serif;max-width:calc(100vw - 32px);text-align:center}
+.cmt-pick *{cursor:crosshair!important}
+.cmt-hover{outline:2px solid var(--xf1613a)!important;outline-offset:2px}
+</style>
+<button id="cmt-btn" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Comentar</span></button>
+<div id="cmt-tip" role="status">Toque no elemento que quer comentar · Esc cancela</div>
+<script>
+(function(){
+  var btn=document.getElementById('cmt-btn'),tip=document.getElementById('cmt-tip'),on=false,last=null,api=null;
+  function set(v){on=v;btn.classList.toggle('on',v);btn.setAttribute('aria-pressed',v);btn.querySelector('span').textContent=v?'Cancelar':'Comentar';tip.style.display=v?'block':'none';document.documentElement.classList.toggle('cmt-pick',v);if(!v&&last){last.classList.remove('cmt-hover');last=null;}}
+  btn.addEventListener('click',function(e){e.stopPropagation();set(!on);});
+  document.addEventListener('mouseover',function(e){if(!on||btn.contains(e.target))return;if(last)last.classList.remove('cmt-hover');last=e.target;last.classList.add('cmt-hover');},true);
+  document.addEventListener('click',function(e){
+    if(!on||btn.contains(e.target))return;
+    e.preventDefault();e.stopPropagation();
+    var el=e.target;set(false);
+    api.openComposer({element:el}).then(function(r){if(r&&r.opened===false){tip.textContent='Não foi possível abrir o comentário agora. Tente de novo.';tip.style.display='block';setTimeout(function(){tip.style.display='none';tip.textContent='Toque no elemento que quer comentar · Esc cancela';},2500);}}).catch(function(){});
+  },true);
+  document.addEventListener('keydown',function(e){if(on&&e.key==='Escape')set(false);});
+  if(window.claude&&window.claude.use){window.claude.use('comments').then(function(c){if(c){api=c;btn.style.display='inline-flex';}});}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Backstage Protótipo</title>
+
+<link rel="stylesheet" href="tema.css">
+<script src="tema.js"></script>
+</head>
+<body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--x1c1c1c);background:var(--xf4f4f2)}
+a{color:var(--x1c1c1c)}a:hover{color:var(--x000)}
+label{font-size:13px;font-weight:600}
+input{height:44px;border:1px solid var(--xc4c4bf);border-radius:8px;padding:0 12px;font:inherit;font-size:14px}
+body{background:var(--x121016);color:var(--xf3f3f3)}
+a{color:var(--xd2b4f5)}a:hover{color:var(--xfff)}
+input{background:var(--x121016);color:var(--xf3f3f3);border-color:var(--x4a4256)}
+label{color:var(--xf3f3f3)}
+form>div:first-child{color:var(--xf1613a)}
+[style*="background:var(--xfff)"]{background:var(--x1c1922)!important}
+[style*="var(--xd9d9d4)"],[style*="var(--xc4c4bf)"]{border-color:var(--x4a4256)!important}
+[style*="background:var(--x1c1c1c)"]{background:var(--x6b3e92)!important}
+[style*="border:1px solid var(--xc4c4bf)"]{color:var(--xf3f3f3)}
+[style*="color:var(--x5c5c58)"]{color:var(--xb3adbd)!important}
+@media (max-width:760px){form{padding:24px!important}}
+</style>
+
+<div style="min-height: 900px; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box; background-color: var(--x1c1c1c)">
+<form style="width: 100%; max-width: 380px; border: 1px solid var(--xd9d9d4); border-radius: 12px; padding: 32px; display: flex; flex-direction: column; gap: 16px; box-sizing: border-box; background-color: var(--x1c1c1c)">
+<div style="font-weight: 700; font-size: 22px; text-align: center; color: var(--xd2b4f5)">Backstage</div>
+<div style="color: var(--xf3f3f3); font-size: 13px">Sistema de controle de eventos · EXP Produções</div>
+<div style="display:flex;flex-direction:column;gap:6px"><label for="em">Email</label><input id="em" type="email" placeholder="nome@exp.rec.br" style="background-color: var(--xf3f3f3)"></div>
+<div style="display:flex;flex-direction:column;gap:6px"><label for="pw">Senha</label><input id="pw" type="password" style="background-color: var(--xf3f3f3)"></div>
+<a href="Main.html" style="display: flex; align-items: center; justify-content: center; height: 44px; border-radius: 8px; color: var(--xfff); text-decoration: none; font-weight: 600; font-size: 14px; background-color: var(--x4a4256)">Entrar</a>
+<a href="Main.html" style="display: flex; align-items: center; justify-content: center; height: 44px; border-radius: 8px; border: 1px solid var(--xc4c4bf); text-decoration: none; font-size: 14px; background-color: var(--xd2b4f5); color: var(--x1c1c1c)">Entrar com Google</a>
+<a href="javascript:void(0)" style="font-size:13px;text-align:center">Esqueci minha senha</a>
+<a href="Banco.html" style="font-size:13px;text-align:center">Ver o mapa do banco de dados</a>
+<div id="tema-slot"></div>
+</form>
+</div>
+
+
+<script>
+(function(){
+var m=document.querySelector('.dc-modal');
+document.querySelectorAll('[data-act]').forEach(function(b){b.addEventListener('click',function(){if(m)m.hidden=b.getAttribute('data-act')!=='open';calc();});});
+function n(id){var e=document.getElementById(id);if(!e)return 0;var x=parseFloat(String(e.value).replace(',','.'));return isNaN(x)?0:x;}
+function fm(x){return 'R$ '+x.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+var fx=document.querySelector('.fx'),vx=document.querySelector('.vx'),kind=document.body.getAttribute('data-calc');
+function calc(){
+ if(!kind)return; var it=document.getElementById('m1').value;
+ if(kind==='piso'){var F=it==='Fechamento';var ar=document.getElementById('m7'),ml=document.getElementById('m8');
+  ar.disabled=F;ml.disabled=!F; if(!F&&!ar.dataset.touched)ar.value=n('m4')*n('m5')*n('m6'); if(F)ar.value='';
+  var v=F?n('m9')*n('m8'):n('m9')*n('m7'); fx.textContent=F?'Valor = valor unitário × metragem linear':'Valor = valor unitário × área M²'; vx.textContent=fm(v);}
+ if(kind==='gradil'){var q=n('m4'),l=n('m5'),c=n('m6'),vu=n('m11');var t=it==='Tenda'?q*l*c:null,lo=it==='Fechamento em lona'?q*l*2.7:null,g=it==='Gradil'?q*2:null;
+  document.getElementById('m7').value=t==null?'':t;document.getElementById('m8').value=lo==null?'':lo.toLocaleString('pt-BR');document.getElementById('m9').value=g==null?'':g;
+  var v=q*vu,f='Valor total = quantidade × valor unitário';if(lo!=null){v=lo*vu;f='Valor total = lonas M² × valor unitário';}if(g!=null){v=g*vu;f='Valor total = gradil ML × valor unitário';}fx.textContent=f;vx.textContent=fm(v);}
+}
+document.addEventListener('input',function(e){if(e.target.id==='m7')e.target.dataset.touched=1;calc();});
+document.addEventListener('change',calc);calc();
+})();
+</script>
+<style>
+#cmt-btn{position:fixed;right:16px;bottom:16px;z-index:50;display:none;align-items:center;gap:8px;height:48px;padding:0 18px;border-radius:99px;border:0;background:var(--xf1613a);color:var(--x1c1922);font:600 15px Inter,system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.45);cursor:pointer}
+#cmt-btn.on{background:var(--x6b3e92);color:var(--on-p)}
+#cmt-tip{position:fixed;left:50%;transform:translateX(-50%);bottom:76px;z-index:50;display:none;background:var(--x26222e);color:var(--xf3f3f3);border:1px solid var(--x4a4256);border-radius:10px;padding:10px 14px;font:14px Inter,system-ui,sans-serif;max-width:calc(100vw - 32px);text-align:center}
+.cmt-pick *{cursor:crosshair!important}
+.cmt-hover{outline:2px solid var(--xf1613a)!important;outline-offset:2px}
+</style>
+<button id="cmt-btn" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Comentar</span></button>
+<div id="cmt-tip" role="status">Toque no elemento que quer comentar · Esc cancela</div>
+<script>
+(function(){
+  var btn=document.getElementById('cmt-btn'),tip=document.getElementById('cmt-tip'),on=false,last=null,api=null;
+  function set(v){on=v;btn.classList.toggle('on',v);btn.setAttribute('aria-pressed',v);btn.querySelector('span').textContent=v?'Cancelar':'Comentar';tip.style.display=v?'block':'none';document.documentElement.classList.toggle('cmt-pick',v);if(!v&&last){last.classList.remove('cmt-hover');last=null;}}
+  btn.addEventListener('click',function(e){e.stopPropagation();set(!on);});
+  document.addEventListener('mouseover',function(e){if(!on||btn.contains(e.target))return;if(last)last.classList.remove('cmt-hover');last=e.target;last.classList.add('cmt-hover');},true);
+  document.addEventListener('click',function(e){
+    if(!on||btn.contains(e.target))return;
+    e.preventDefault();e.stopPropagation();
+    var el=e.target;set(false);
+    api.openComposer({element:el}).then(function(r){if(r&&r.opened===false){tip.textContent='Não foi possível abrir o comentário agora. Tente de novo.';tip.style.display='block';setTimeout(function(){tip.style.display='none';tip.textContent='Toque no elemento que quer comentar · Esc cancela';},2500);}}).catch(function(){});
+  },true);
+  document.addEventListener('keydown',function(e){if(on&&e.key==='Escape')set(false);});
+  if(window.claude&&window.claude.use){window.claude.use('comments').then(function(c){if(c){api=c;btn.style.display='inline-flex';}});}
+})();
+</script>
+</body>
+</html>

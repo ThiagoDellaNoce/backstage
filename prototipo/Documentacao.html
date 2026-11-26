@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Evento · Documentação</title>
+
+<link rel="stylesheet" href="tema.css">
+<script src="tema.js"></script>
+</head>
+<body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--x1c1c1c);background:var(--xf4f4f2)}
+a{color:var(--x1c1c1c)}a:hover{color:var(--x000)}
+.app{display:flex;flex-wrap:wrap;min-height:900px}
+.side{flex:1 1 220px;background:var(--x1c1c1c);color:var(--xe8e8e6);padding:20px 14px;display:flex;flex-direction:column;gap:2px}
+.side a{display:block;padding:10px 12px;border-radius:8px;color:var(--xc9c9c4);text-decoration:none;font-size:14px}
+.side a:hover{background:var(--x2a2a2a);color:var(--xfff)}.side a.on{background:var(--x3a3a38);color:var(--xfff);font-weight:600}
+.sec{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--xa3a39e);padding:16px 12px 6px}
+.main{flex:999 1 560px;min-width:0;padding:28px 32px;display:flex;flex-direction:column;gap:18px;box-sizing:border-box}
+.box{background:var(--xfff);border:1px solid var(--xd9d9d4);border-radius:10px;padding:16px}
+.muted{color:var(--x5c5c58);font-size:13px}
+.tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;background:var(--xececea);color:var(--x3a3a38)}
+.ok{background:var(--xdcefe3);color:var(--x1d5b34)}.warn{background:var(--xfbe9c8);color:var(--x6e4300)}.bad{background:var(--xf7d9d6);color:var(--x8a1f15)}.info{background:var(--xdbe6f7);color:var(--x1f3f75)}
+.btn{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--x1c1c1c);background:var(--x1c1c1c);color:var(--xfff);font:inherit;font-size:14px;text-decoration:none}
+.btn2{background:var(--xfff);color:var(--x1c1c1c);border-color:var(--xc4c4bf)}
+.sm{height:34px;padding:0 12px;font-size:13px}
+.tabs{display:flex;flex-wrap:wrap;gap:4px;border-bottom:1px solid var(--xd9d9d4)}
+.tabs a{padding:10px 14px;text-decoration:none;font-size:14px;color:var(--x5c5c58);border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabs a.on{color:var(--x1c1c1c);font-weight:600;border-bottom-color:var(--x1c1c1c)}
+.doc{display:flex;flex-direction:column;gap:12px}
+dl{display:grid;grid-template-columns:110px 1fr;gap:6px 10px;margin:0;font-size:13px}dt{color:var(--x5c5c58)}dd{margin:0}
+.steps{display:flex;gap:4px}.steps i{flex:1;height:6px;border-radius:99px;background:var(--xececea)}.steps i.f{background:var(--x1c1c1c)}
+h1{margin:0;font-size:24px}h2{margin:0;font-size:18px}
+body{background:var(--x121016);color:var(--xf3f3f3)}
+a{color:var(--xd2b4f5)}a:hover{color:var(--xfff)}
+.side{background:var(--x0c0a0f);border-right:1px solid var(--x2a2532)}
+.side>div:first-child{color:var(--xf1613a)!important}
+.side a{color:var(--xb3adbd)}.side a:hover{background:var(--x1f1b26);color:var(--xf3f3f3)}
+.side a.on{background:var(--x6b3e92);color:var(--on-p)}
+.sec{color:var(--x8d8698)}
+.box{background:var(--x1c1922);border-color:var(--x352f40);color:var(--xf3f3f3)}
+.muted,dt{color:var(--xb3adbd)}
+.tag{background:var(--x2b2733);color:var(--xd6d1dd)}
+.ok{background:var(--x173a27);color:var(--x7fe0a6)}.warn{background:var(--x3d2e10);color:var(--xf5c26b)}.bad{background:var(--x41191a);color:var(--xff9a85)}.info{background:var(--x2e2340);color:var(--xd2b4f5)}
+.btn{background:var(--x6b3e92);border-color:var(--x6b3e92);color:var(--on-p)}
+.btn2{background:transparent;color:var(--xf3f3f3);border-color:var(--x4a4256)}
+.tabs{border-bottom-color:var(--x352f40)}.tabs a{color:var(--xb3adbd)}.tabs a.on{color:var(--xf3f3f3);border-bottom-color:var(--xf1613a)}
+.steps i{background:var(--x2b2733)}.steps i.f{background:var(--xf1613a)}
+[style*="color:var(--x6e4300)"]{color:var(--xf5c26b)!important}
+@media (max-width:760px){
+.app{flex-direction:column}
+.side{flex:0 0 auto;flex-direction:row;align-items:center;gap:4px;padding:10px 12px;overflow-x:auto;position:sticky;top:0;z-index:5;border-right:0;border-bottom:1px solid var(--x2a2532)}
+.side>div:first-child{padding:0 8px 0 0!important;flex:0 0 auto}
+.side .sec,.side>div[style*="flex-grow"]{display:none}
+.side a{flex:0 0 auto;white-space:nowrap}
+.main{padding:16px;gap:14px}
+.tabs{flex-wrap:nowrap;overflow-x:auto}
+.tabs a{white-space:nowrap;padding:12px}
+h1{font-size:20px}
+.btn{height:44px}.sm{height:40px}
+}
+.side a.par{color:var(--xf3f3f3);font-weight:600}
+.sub{display:flex;flex-direction:column;gap:2px;margin:2px 0 6px 12px;padding-left:10px;border-left:1px solid var(--x352f40)}
+.sub .ev{font-size:12px;color:var(--x8d8698);padding:6px 12px 2px}
+.side .sub a{padding:8px 12px;font-size:13px}
+.side .sub a.on{background:var(--x2e2340);color:var(--xfff);box-shadow:inset 3px 0 0 var(--xf1613a)}
+.side .sub .off,.tabs .off{display:flex;align-items:center;justify-content:space-between;gap:8px;color:var(--x5f5970);cursor:not-allowed;font-size:13px;padding:8px 12px}
+.tabs .off{padding:10px 14px;font-size:14px;display:inline-flex}
+.off em{font-style:normal;font-size:11px;border:1px solid var(--x352f40);border-radius:99px;padding:1px 7px;color:var(--x8d8698)}
+</style>
+
+<div class="app">
+<nav class="side" aria-label="Menu principal">
+<div style="font-weight:700;font-size:18px;padding:4px 12px 16px;color:var(--xfff)">backstage</div>
+<a href="Main.html">Painel</a>
+<a class="par" href="Eventos.html">Eventos</a>
+<div class="sub"><div class="ev">[Evento A]</div><a href="EventoGeral.html">Visão geral</a><a href="Planilha.html">Planilha de trabalho</a><a href="Cronograma.html">Cronograma</a><a href="Atracoes.html">Artístico</a><a class="on" href="Documentacao.html">Documentação</a><span class="off" aria-disabled="true" title="Desabilitado por enquanto">Pagamentos <em>em breve</em></span></div>
+<div class="sec">Empresa</div>
+<a href="Estoque.html">Estoque</a>
+<a href="Cadastros.html">Cadastros</a>
+<div class="sec">Projeto</div>
+<a href="Banco.html">Mapa do banco</a>
+<div style="flex-grow:1"></div>
+<a href="index.html">Sair · [Usuário]</a>
+</nav>
+<main class="main">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:flex-end">
+<div><div class="muted"><a href="Eventos.html">Eventos</a> / [Evento A]</div><h1>[Evento A]</h1></div>
+<a class="btn" href="javascript:void(0)">+ Documento</a>
+</div>
+<nav class="tabs" aria-label="Seções do evento">
+<a href="EventoGeral.html">Visão geral</a><a href="Planilha.html">Planilha de trabalho</a><a href="Cronograma.html">Cronograma</a><a href="Atracoes.html">Artístico</a><a class="on" href="Documentacao.html">Documentação</a><span class="off" aria-disabled="true" title="Desabilitado por enquanto">Pagamentos <em>em breve</em></span>
+</nav>
+<div class="muted">Etapas: Pendente → Protocolado → Em análise → Aprovado</div>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">
+<section class="box doc">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>CEMIG</h2><span class="tag ok">Aprovado</span></div>
+<div class="steps"><i class="f"></i><i class="f"></i><i class="f"></i><i class="f"></i></div>
+<dl><dt>Protocolo</dt><dd>[nº]</dd><dt>Prazo</dt><dd>[dd/mm] · D-20</dd><dt>Emitido</dt><dd>[dd/mm]</dd><dt>Responsável</dt><dd>[Nome]</dd></dl>
+<div style="display:flex;gap:8px"><a class="btn btn2 sm" href="javascript:void(0)">Ver arquivo</a></div>
+</section>
+<section class="box doc">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>AVCB</h2><span class="tag warn">Em análise</span></div>
+<div class="steps"><i class="f"></i><i class="f"></i><i class="f"></i><i></i></div>
+<dl><dt>Protocolo</dt><dd>[nº]</dd><dt>Prazo</dt><dd><b style="color:var(--x6e4300)">[dd/mm] · vence em 5 dias</b></dd><dt>Vistoria</dt><dd>[dd/mm] · D-1</dd><dt>Responsável</dt><dd>[Nome]</dd></dl>
+<div style="display:flex;gap:8px"><a class="btn btn2 sm" href="javascript:void(0)">Anexar</a><a class="btn btn2 sm" href="javascript:void(0)">Atualizar status</a></div>
+</section>
+<section class="box doc">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>CODAU</h2><span class="tag info">Protocolado</span></div>
+<div class="steps"><i class="f"></i><i class="f"></i><i></i><i></i></div>
+<dl><dt>Protocolo</dt><dd>[nº]</dd><dt>Prazo</dt><dd>[dd/mm] · D-7</dd><dt>Emitido</dt><dd>—</dd><dt>Responsável</dt><dd>[Nome]</dd></dl>
+<div style="display:flex;gap:8px"><a class="btn btn2 sm" href="javascript:void(0)">Anexar</a><a class="btn btn2 sm" href="javascript:void(0)">Atualizar status</a></div>
+</section>
+<section class="box doc">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>Alvará</h2><span class="tag bad">Pendente</span></div>
+<div class="steps"><i></i><i></i><i></i><i></i></div>
+<dl><dt>Protocolo</dt><dd>—</dd><dt>Prazo</dt><dd>[dd/mm] · D-3</dd><dt>Depende de</dt><dd>AVCB aprovado</dd><dt>Responsável</dt><dd>[Nome]</dd></dl>
+<div style="display:flex;gap:8px"><a class="btn sm" href="javascript:void(0)">Protocolar</a></div>
+</section>
+</div>
+</main>
+</div>
+
+
+<script>
+(function(){
+var m=document.querySelector('.dc-modal');
+document.querySelectorAll('[data-act]').forEach(function(b){b.addEventListener('click',function(){if(m)m.hidden=b.getAttribute('data-act')!=='open';calc();});});
+function n(id){var e=document.getElementById(id);if(!e)return 0;var x=parseFloat(String(e.value).replace(',','.'));return isNaN(x)?0:x;}
+function fm(x){return 'R$ '+x.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+var fx=document.querySelector('.fx'),vx=document.querySelector('.vx'),kind=document.body.getAttribute('data-calc');
+function calc(){
+ if(!kind)return; var it=document.getElementById('m1').value;
+ if(kind==='piso'){var F=it==='Fechamento';var ar=document.getElementById('m7'),ml=document.getElementById('m8');
+  ar.disabled=F;ml.disabled=!F; if(!F&&!ar.dataset.touched)ar.value=n('m4')*n('m5')*n('m6'); if(F)ar.value='';
+  var v=F?n('m9')*n('m8'):n('m9')*n('m7'); fx.textContent=F?'Valor = valor unitário × metragem linear':'Valor = valor unitário × área M²'; vx.textContent=fm(v);}
+ if(kind==='gradil'){var q=n('m4'),l=n('m5'),c=n('m6'),vu=n('m11');var t=it==='Tenda'?q*l*c:null,lo=it==='Fechamento em lona'?q*l*2.7:null,g=it==='Gradil'?q*2:null;
+  document.getElementById('m7').value=t==null?'':t;document.getElementById('m8').value=lo==null?'':lo.toLocaleString('pt-BR');document.getElementById('m9').value=g==null?'':g;
+  var v=q*vu,f='Valor total = quantidade × valor unitário';if(lo!=null){v=lo*vu;f='Valor total = lonas M² × valor unitário';}if(g!=null){v=g*vu;f='Valor total = gradil ML × valor unitário';}fx.textContent=f;vx.textContent=fm(v);}
+}
+document.addEventListener('input',function(e){if(e.target.id==='m7')e.target.dataset.touched=1;calc();});
+document.addEventListener('change',calc);calc();
+})();
+</script>
+<style>
+#cmt-btn{position:fixed;right:16px;bottom:16px;z-index:50;display:none;align-items:center;gap:8px;height:48px;padding:0 18px;border-radius:99px;border:0;background:var(--xf1613a);color:var(--x1c1922);font:600 15px Inter,system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.45);cursor:pointer}
+#cmt-btn.on{background:var(--x6b3e92);color:var(--on-p)}
+#cmt-tip{position:fixed;left:50%;transform:translateX(-50%);bottom:76px;z-index:50;display:none;background:var(--x26222e);color:var(--xf3f3f3);border:1px solid var(--x4a4256);border-radius:10px;padding:10px 14px;font:14px Inter,system-ui,sans-serif;max-width:calc(100vw - 32px);text-align:center}
+.cmt-pick *{cursor:crosshair!important}
+.cmt-hover{outline:2px solid var(--xf1613a)!important;outline-offset:2px}
+</style>
+<button id="cmt-btn" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Comentar</span></button>
+<div id="cmt-tip" role="status">Toque no elemento que quer comentar · Esc cancela</div>
+<script>
+(function(){
+  var btn=document.getElementById('cmt-btn'),tip=document.getElementById('cmt-tip'),on=false,last=null,api=null;
+  function set(v){on=v;btn.classList.toggle('on',v);btn.setAttribute('aria-pressed',v);btn.querySelector('span').textContent=v?'Cancelar':'Comentar';tip.style.display=v?'block':'none';document.documentElement.classList.toggle('cmt-pick',v);if(!v&&last){last.classList.remove('cmt-hover');last=null;}}
+  btn.addEventListener('click',function(e){e.stopPropagation();set(!on);});
+  document.addEventListener('mouseover',function(e){if(!on||btn.contains(e.target))return;if(last)last.classList.remove('cmt-hover');last=e.target;last.classList.add('cmt-hover');},true);
+  document.addEventListener('click',function(e){
+    if(!on||btn.contains(e.target))return;
+    e.preventDefault();e.stopPropagation();
+    var el=e.target;set(false);
+    api.openComposer({element:el}).then(function(r){if(r&&r.opened===false){tip.textContent='Não foi possível abrir o comentário agora. Tente de novo.';tip.style.display='block';setTimeout(function(){tip.style.display='none';tip.textContent='Toque no elemento que quer comentar · Esc cancela';},2500);}}).catch(function(){});
+  },true);
+  document.addEventListener('keydown',function(e){if(on&&e.key==='Escape')set(false);});
+  if(window.claude&&window.claude.use){window.claude.use('comments').then(function(c){if(c){api=c;btn.style.display='inline-flex';}});}
+})();
+</script>
+</body>
+</html>

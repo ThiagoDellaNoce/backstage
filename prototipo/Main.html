@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel geral</title>
+
+<link rel="stylesheet" href="tema.css">
+<script src="tema.js"></script>
+</head>
+<body>
+
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--x1c1c1c);background:var(--xf4f4f2)}
+a{color:var(--x1c1c1c)}a:hover{color:var(--x000)}
+.app{display:flex;flex-wrap:wrap;min-height:900px}
+.side{flex:1 1 220px;background:var(--x1c1c1c);color:var(--xe8e8e6);padding:20px 14px;display:flex;flex-direction:column;gap:2px}
+.side a{display:block;padding:10px 12px;border-radius:8px;color:var(--xc9c9c4);text-decoration:none;font-size:14px}
+.side a:hover{background:var(--x2a2a2a);color:var(--xfff)}.side a.on{background:var(--x3a3a38);color:var(--xfff);font-weight:600}
+.sec{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--xa3a39e);padding:16px 12px 6px}
+.main{flex:999 1 560px;min-width:0;padding:28px 32px;display:flex;flex-direction:column;gap:20px;box-sizing:border-box}
+.box{background:var(--xfff);border:1px solid var(--xd9d9d4);border-radius:10px;padding:16px}
+.muted{color:var(--x5c5c58);font-size:13px}
+.tw{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;color:var(--x5c5c58);font-weight:600;border-bottom:1px solid var(--xd9d9d4);padding:8px;white-space:nowrap}
+td{padding:9px 8px;border-bottom:1px solid var(--xecece9);white-space:nowrap}
+.tag{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;background:var(--xececea);color:var(--x3a3a38)}
+.ok{background:var(--xdcefe3);color:var(--x1d5b34)}.warn{background:var(--xfbe9c8);color:var(--x6e4300)}.bad{background:var(--xf7d9d6);color:var(--x8a1f15)}.info{background:var(--xdbe6f7);color:var(--x1f3f75)}
+.btn{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 16px;border-radius:8px;border:1px solid var(--x1c1c1c);background:var(--x1c1c1c);color:var(--xfff);font:inherit;font-size:14px;text-decoration:none;cursor:pointer}
+.btn2{background:var(--xfff);color:var(--x1c1c1c);border-color:var(--xc4c4bf)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.kpi b{display:block;font-size:24px;margin-top:4px}
+h1{margin:0;font-size:24px}h2{margin:0 0 12px;font-size:16px}
+body{background:var(--x121016);color:var(--xf3f3f3)}
+a{color:var(--xd2b4f5)}a:hover{color:var(--xfff)}
+.side{background:var(--x0c0a0f);border-right:1px solid var(--x2a2532)}
+.side>div:first-child{color:var(--xf1613a)!important}
+.side a{color:var(--xb3adbd)}.side a:hover{background:var(--x1f1b26);color:var(--xf3f3f3)}
+.side a.on{background:var(--x6b3e92);color:var(--on-p)}
+.sec{color:var(--x8d8698)}
+.box,.at,.card{background:var(--x1c1922);border-color:var(--x352f40);color:var(--xf3f3f3)}
+.muted,dt,.lbl,th{color:var(--xb3adbd)}
+th{border-bottom-color:var(--x352f40)}
+td{border-bottom-color:var(--x2a2532);border-left-color:var(--x2a2532)}
+tr.cat td,th.ev,td.ev,.d0{background:var(--x26222e)}
+tr.sel td{background:var(--x2e2340)}
+.tag{background:var(--x2b2733);color:var(--xd6d1dd)}
+.ok{background:var(--x173a27);color:var(--x7fe0a6)}.warn{background:var(--x3d2e10);color:var(--xf5c26b)}.bad{background:var(--x41191a);color:var(--xff9a85)}.info{background:var(--x2e2340);color:var(--xd2b4f5)}
+.btn{background:var(--x6b3e92);border-color:var(--x6b3e92);color:var(--on-p)}
+.btn2{background:transparent;color:var(--xf3f3f3);border-color:var(--x4a4256)}
+.chip{background:transparent;border-color:var(--x4a4256);color:var(--xf3f3f3)}.chip.on{background:var(--x6b3e92);border-color:var(--x6b3e92);color:var(--on-p)}
+.tabs{border-bottom-color:var(--x352f40)}.tabs a{color:var(--xb3adbd)}.tabs a.on{color:var(--xf3f3f3);border-bottom-color:var(--xf1613a)}
+input,select{background:var(--x121016);color:var(--xf3f3f3);border-color:var(--x4a4256)}
+label{color:var(--xf3f3f3)}
+.bar{background:var(--x2b2733)}.bar i{background:var(--xf1613a)}
+.steps i{background:var(--x2b2733)}.steps i.f{background:var(--xf1613a)}
+.paid{background:var(--x9b6bc7)}.due{background:var(--x4a4256)}.late{background:var(--xf1613a)}
+.stack{border-bottom-color:var(--x4a4256)}
+.lbl.today{color:var(--xf1613a)}
+.M{background:var(--x3d2a55);color:var(--xe2cdf7)}.O{background:var(--x6b3e92);color:var(--on-p)}.D{background:var(--x4a2418);color:var(--xffb39e)}
+.at.on{border-color:var(--x6b3e92);box-shadow:inset 3px 0 0 var(--xf1613a)}
+.card:hover{border-color:var(--x6b3e92)}
+[style*="background:var(--xfff)"]{background:var(--x1c1922)!important}
+[style*="var(--xd9d9d4)"],[style*="var(--xc4c4bf)"]{border-color:var(--x4a4256)!important}
+[style*="background:var(--x1c1c1c)"]{background:var(--x6b3e92)!important}
+[style*="color:var(--x5c5c58)"]{color:var(--xb3adbd)!important}
+[style*="color:var(--x8a1f15)"]{color:var(--xff9a85)!important}
+[style*="color:var(--x6e4300)"]{color:var(--xf5c26b)!important}
+@media (max-width:760px){
+.app{flex-direction:column}
+.side{flex:0 0 auto;flex-direction:row;align-items:center;gap:4px;padding:10px 12px;overflow-x:auto;position:sticky;top:0;z-index:5;border-right:0;border-bottom:1px solid var(--x2a2532)}
+.side>div:first-child{padding:0 8px 0 0!important;flex:0 0 auto}
+.side .sec,.side>div[style*="flex-grow"]{display:none}
+.side a{flex:0 0 auto;white-space:nowrap}
+.main{padding:16px;gap:14px}
+.tabs{flex-wrap:nowrap;overflow-x:auto}
+.tabs a{white-space:nowrap;padding:12px}
+h1{font-size:20px}
+.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+.kpi b{font-size:18px}
+.btn{height:44px}
+}
+</style>
+
+<div class="app">
+<nav class="side" aria-label="Menu principal">
+<div style="font-weight:700;font-size:18px;padding:4px 12px 16px;color:var(--xfff)">backstage</div>
+<a class="on" href="Main.html">Painel</a>
+<a href="Eventos.html">Eventos</a>
+<div class="sec">Empresa</div>
+<a href="Estoque.html">Estoque</a>
+<a href="Cadastros.html">Cadastros</a>
+<div class="sec">Projeto</div>
+<a href="Banco.html">Mapa do banco</a>
+<div style="flex-grow:1"></div>
+<a href="javascript:void(0)" style="display:flex;align-items:center;gap:8px"><span style="width:8px;height:8px;border-radius:99px;background:var(--x7fe0a6);display:inline-block"></span>Asana conectado</a>
+<a href="index.html">Sair · [Usuário]</a>
+</nav>
+<main class="main">
+<div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:space-between;align-items:center">
+<div><div class="muted">[Usuário] · [terça, 27 de outubro]</div><h1>Bom dia! Hoje o palco sobe e o café não pode faltar.</h1><div class="muted">Frase do dia: muda a cada dia, sorteada de uma lista de mensagens divertidas</div></div>
+<a class="btn" href="Eventos.html">+ Novo evento</a>
+</div>
+<div class="kpis">
+<div class="box kpi"><span class="muted">Eventos ativos</span><b>[3]</b></div>
+<div class="box kpi"><span class="muted">Pagamentos nos próximos 7 dias</span><b>[R$ 0,00]</b></div>
+</div>
+<section style="display:flex;flex-direction:column;gap:12px">
+<div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap"><h2 style="margin:0">Minhas tarefas no Asana</h2><div style="display:flex;gap:12px;align-items:center"><span class="muted">Sincronizado há [2 min]</span><a class="btn btn2" href="javascript:void(0)">Abrir no Asana</a></div></div>
+<div class="kpis">
+<a class="box kpi" href="javascript:void(0)" style="text-decoration:none;color:var(--xf3f3f3);border-top:3px solid var(--x6b3e92)"><span class="muted">Tarefas para hoje</span><b>[5]</b><span class="muted">[2] já concluídas</span></a>
+<a class="box kpi" href="javascript:void(0)" style="text-decoration:none;color:var(--xf3f3f3);border-top:3px solid var(--xf1613a)"><span class="muted">Tarefas atrasadas</span><b style="color:var(--xf1613a)">[3]</b><span class="muted">a mais antiga: [4 dias]</span></a>
+<a class="box kpi" href="javascript:void(0)" style="text-decoration:none;color:var(--xf3f3f3);border-top:3px solid var(--x4a4256)"><span class="muted">Na sua fila</span><b>[27]</b><span class="muted">tarefas em aberto atribuídas a você</span></a>
+</div>
+</section>
+<section class="box">
+<h2>Próximos eventos</h2>
+<div class="tw"><table>
+<tr><th>Evento</th><th>Data</th><th>Faltam</th><th>Status</th><th>Pagamento</th><th></th></tr>
+<tr><td>[Evento A]</td><td>[dd/mm]</td><td>D-12</td><td><span class="tag info">Montagem</span></td><td>[40%] pago</td><td style="text-align:right"><a class="btn" href="EventoGeral.html" style="height:34px;font-size:13px">Entrar no evento →</a></td></tr>
+<tr><td>[Evento B]</td><td>[dd/mm]</td><td>D-30</td><td><span class="tag">Planejamento</span></td><td>[10%] pago</td><td style="text-align:right"><a class="btn" href="EventoGeral.html" style="height:34px;font-size:13px">Entrar no evento →</a></td></tr>
+<tr><td>[Evento C]</td><td>[dd/mm]</td><td>D-58</td><td><span class="tag">Planejamento</span></td><td>[0%] pago</td><td style="text-align:right"><a class="btn" href="EventoGeral.html" style="height:34px;font-size:13px">Entrar no evento →</a></td></tr>
+</table></div>
+</section>
+<div style="display:flex;flex-wrap:wrap;gap:16px">
+<section class="box" style="flex:1 1 300px;min-width:0">
+<h2>Pontos de atenção</h2>
+<div style="display:flex;flex-direction:column;gap:10px;font-size:13px">
+<div style="display:flex;gap:8px;align-items:center"><span class="tag bad">Atrasado</span><span>[Fornecedor] · parcela 2/2 · [Evento A]</span></div>
+<div style="display:flex;gap:8px;align-items:center"><span class="tag warn">Vence em 5d</span><span>AVCB · [Evento A]</span></div>
+<div style="display:flex;gap:8px;align-items:center"><span class="tag warn">Sem NF</span><span>[Fornecedor] · Tendas · [Evento B]</span></div>
+<div style="display:flex;gap:8px;align-items:center"><span class="tag info">Hoje</span><span>Montagem de palco · [Evento A]</span></div>
+</div>
+</section>
+<section class="box" style="flex:2 1 460px;min-width:0">
+<h2>Pagamentos da semana</h2>
+<div class="tw"><table>
+<tr><th>Vencimento</th><th>Evento</th><th>Item</th><th>Fornecedor</th><th>Parcela</th><th>Valor</th><th>Status</th></tr>
+<tr><td>[seg dd/mm]</td><td>[Evento A]</td><td>Tendas</td><td>[Fornecedor]</td><td>2/2</td><td>[R$]</td><td><span class="tag ok">Liberada</span></td></tr>
+<tr><td>[qua dd/mm]</td><td>[Evento A]</td><td>Som e Luz Palco</td><td>[Fornecedor]</td><td>1/3</td><td>[R$]</td><td><span class="tag warn">Aguardando NF</span></td></tr>
+<tr><td>[sex dd/mm]</td><td>[Evento B]</td><td>Cachê [Atração]</td><td>[Produtora]</td><td>1/2</td><td>[R$]</td><td><span class="tag">Prevista</span></td></tr>
+</table></div>
+</section>
+</div>
+</main>
+</div>
+
+
+<script>
+(function(){
+var m=document.querySelector('.dc-modal');
+document.querySelectorAll('[data-act]').forEach(function(b){b.addEventListener('click',function(){if(m)m.hidden=b.getAttribute('data-act')!=='open';calc();});});
+function n(id){var e=document.getElementById(id);if(!e)return 0;var x=parseFloat(String(e.value).replace(',','.'));return isNaN(x)?0:x;}
+function fm(x){return 'R$ '+x.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+var fx=document.querySelector('.fx'),vx=document.querySelector('.vx'),kind=document.body.getAttribute('data-calc');
+function calc(){
+ if(!kind)return; var it=document.getElementById('m1').value;
+ if(kind==='piso'){var F=it==='Fechamento';var ar=document.getElementById('m7'),ml=document.getElementById('m8');
+  ar.disabled=F;ml.disabled=!F; if(!F&&!ar.dataset.touched)ar.value=n('m4')*n('m5')*n('m6'); if(F)ar.value='';
+  var v=F?n('m9')*n('m8'):n('m9')*n('m7'); fx.textContent=F?'Valor = valor unitário × metragem linear':'Valor = valor unitário × área M²'; vx.textContent=fm(v);}
+ if(kind==='gradil'){var q=n('m4'),l=n('m5'),c=n('m6'),vu=n('m11');var t=it==='Tenda'?q*l*c:null,lo=it==='Fechamento em lona'?q*l*2.7:null,g=it==='Gradil'?q*2:null;
+  document.getElementById('m7').value=t==null?'':t;document.getElementById('m8').value=lo==null?'':lo.toLocaleString('pt-BR');document.getElementById('m9').value=g==null?'':g;
+  var v=q*vu,f='Valor total = quantidade × valor unitário';if(lo!=null){v=lo*vu;f='Valor total = lonas M² × valor unitário';}if(g!=null){v=g*vu;f='Valor total = gradil ML × valor unitário';}fx.textContent=f;vx.textContent=fm(v);}
+}
+document.addEventListener('input',function(e){if(e.target.id==='m7')e.target.dataset.touched=1;calc();});
+document.addEventListener('change',calc);calc();
+})();
+</script>
+<style>
+#cmt-btn{position:fixed;right:16px;bottom:16px;z-index:50;display:none;align-items:center;gap:8px;height:48px;padding:0 18px;border-radius:99px;border:0;background:var(--xf1613a);color:var(--x1c1922);font:600 15px Inter,system-ui,sans-serif;box-shadow:0 6px 20px rgba(0,0,0,.45);cursor:pointer}
+#cmt-btn.on{background:var(--x6b3e92);color:var(--on-p)}
+#cmt-tip{position:fixed;left:50%;transform:translateX(-50%);bottom:76px;z-index:50;display:none;background:var(--x26222e);color:var(--xf3f3f3);border:1px solid var(--x4a4256);border-radius:10px;padding:10px 14px;font:14px Inter,system-ui,sans-serif;max-width:calc(100vw - 32px);text-align:center}
+.cmt-pick *{cursor:crosshair!important}
+.cmt-hover{outline:2px solid var(--xf1613a)!important;outline-offset:2px}
+</style>
+<button id="cmt-btn" type="button" aria-pressed="false"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Comentar</span></button>
+<div id="cmt-tip" role="status">Toque no elemento que quer comentar · Esc cancela</div>
+<script>
+(function(){
+  var btn=document.getElementById('cmt-btn'),tip=document.getElementById('cmt-tip'),on=false,last=null,api=null;
+  function set(v){on=v;btn.classList.toggle('on',v);btn.setAttribute('aria-pressed',v);btn.querySelector('span').textContent=v?'Cancelar':'Comentar';tip.style.display=v?'block':'none';document.documentElement.classList.toggle('cmt-pick',v);if(!v&&last){last.classList.remove('cmt-hover');last=null;}}
+  btn.addEventListener('click',function(e){e.stopPropagation();set(!on);});
+  document.addEventListener('mouseover',function(e){if(!on||btn.contains(e.target))return;if(last)last.classList.remove('cmt-hover');last=e.target;last.classList.add('cmt-hover');},true);
+  document.addEventListener('click',function(e){
+    if(!on||btn.contains(e.target))return;
+    e.preventDefault();e.stopPropagation();
+    var el=e.target;set(false);
+    api.openComposer({element:el}).then(function(r){if(r&&r.opened===false){tip.textContent='Não foi possível abrir o comentário agora. Tente de novo.';tip.style.display='block';setTimeout(function(){tip.style.display='none';tip.textContent='Toque no elemento que quer comentar · Esc cancela';},2500);}}).catch(function(){});
+  },true);
+  document.addEventListener('keydown',function(e){if(on&&e.key==='Escape')set(false);});
+  if(window.claude&&window.claude.use){window.claude.use('comments').then(function(c){if(c){api=c;btn.style.display='inline-flex';}});}
+})();
+</script>
+</body>
+</html>

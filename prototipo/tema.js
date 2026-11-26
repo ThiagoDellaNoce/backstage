@@ -1,0 +1,19 @@
+/* Tema do protótipo: lê a escolha salva e monta o seletor no menu lateral */
+(function(){
+  var K='backstage-tema',d=document.documentElement,t='roxo';
+  try{t=localStorage.getItem(K)||'roxo'}catch(e){}
+  d.setAttribute('data-tema',t);
+  function set(v){t=v;d.setAttribute('data-tema',v);try{localStorage.setItem(K,v)}catch(e){}
+    document.querySelectorAll('.tema button').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.t===v)})}
+  function box(){
+    var w=document.createElement('div');w.className='tema';w.setAttribute('role','group');w.setAttribute('aria-label','Tema');
+    w.innerHTML='<span>Tema</span><div><button type="button" data-t="roxo"><i style="background:#6b3e92"></i>Roxo</button><button type="button" data-t="verde"><i style="background:#1db954"></i>Verde</button></div>';
+    w.addEventListener('click',function(e){var b=e.target.closest('button');if(b){e.preventDefault();set(b.dataset.t)}});
+    return w}
+  document.addEventListener('DOMContentLoaded',function(){
+    var side=document.querySelector('nav.side'),slot=document.getElementById('tema-slot');
+    if(side){var sair=side.querySelector('a[href="index.html"]');side.insertBefore(box(),sair||null)}
+    else if(slot){slot.appendChild(box())}
+    set(t);
+  });
+})();
