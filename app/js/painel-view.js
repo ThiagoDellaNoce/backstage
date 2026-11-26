@@ -1,5 +1,5 @@
 // Desenho do Painel a partir dos dados já carregados (sem acesso ao banco).
-import { esc, hoje, diasEntre, somarDias, dx, dataCurta, dataPorExtenso, STATUS_EVENTO, FASE, PERIODO } from './util.js';
+import { esc, hoje, diasEntre, somarDias, dx, dataCurta, dataPorExtenso, faltamHtml, STATUS_EVENTO, FASE, PERIODO } from './util.js';
 
 const ATIVOS = ['planejamento', 'montagem', 'operacao', 'desmontagem'];
 
@@ -9,14 +9,6 @@ export function fraseDoDia(frases, data = hoje()) {
   const n = Math.floor(Date.UTC(+data.slice(0, 4), +data.slice(5, 7) - 1, +data.slice(8, 10)) / 86400000);
   const lista = [...frases].sort((a, b) => a.id - b.id);
   return lista[n % lista.length].texto;
-}
-
-/** "Faltam": D-12, Hoje, Em andamento (eventos de vários dias). */
-function faltam(ev, h) {
-  const n = diasEntre(h, ev.data_evento);
-  if (n > 0) return `D-${n}`;
-  if (n === 0) return '<span class="tag info">Hoje</span>';
-  return '<span class="tag ok">Em andamento</span>';
 }
 
 /** Monta a lista de pontos de atenção (documentos e cronograma de hoje). */
@@ -80,7 +72,7 @@ export function desenharPainel(main, usuario, dados, h = hoje()) {
     return `<tr>
       <td><b>${esc(e.nome)}</b>${onde ? `<div class="muted">${esc(onde)}</div>` : ''}</td>
       <td>${dataCurta(e.data_evento)}${e.data_fim && e.data_fim !== e.data_evento ? ` a ${dataCurta(e.data_fim)}` : ''}</td>
-      <td>${faltam(e, h)}</td>
+      <td>${faltamHtml(e, h)}</td>
       <td><span class="tag ${s.tag}">${s.nome}</span></td>
       <td class="dir"><a class="btn btn-primary btn-sm" aria-disabled="true" title="Visão geral do evento: em breve">Entrar no evento →</a></td>
     </tr>`;

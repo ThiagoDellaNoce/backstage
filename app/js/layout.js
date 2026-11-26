@@ -5,7 +5,7 @@ import { esc } from './util.js';
 // href nulo = tela ainda não construída (aparece como "em breve")
 const MENU = [
   { id: 'painel', nome: 'Painel', href: 'painel.html' },
-  { id: 'eventos', nome: 'Eventos', href: null },
+  { id: 'eventos', nome: 'Eventos', href: 'eventos.html' },
   { sec: 'Empresa' },
   { id: 'estoque', nome: 'Estoque', href: null },
   { id: 'cadastros', nome: 'Cadastros', href: null },

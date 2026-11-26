@@ -40,6 +40,20 @@ export function dataPorExtenso(d = new Date()) {
   return d.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' });
 }
 
+/** Quanto falta para o evento: D-12, Hoje, Em andamento (vários dias) ou D+3 (já passou). */
+export function faltam(ev, h = hoje()) {
+  const n = diasEntre(h, ev.data_evento);
+  if (n > 0) return { texto: `D-${n}` };
+  if (n === 0) return { texto: 'Hoje', tag: 'info' };
+  if ((ev.data_fim || ev.data_evento) >= h) return { texto: 'Em andamento', tag: 'ok' };
+  return { texto: `D+${-n}` };
+}
+
+export function faltamHtml(ev, h = hoje()) {
+  const f = faltam(ev, h);
+  return f.tag ? `<span class="tag ${f.tag}">${f.texto}</span>` : f.texto;
+}
+
 export const STATUS_EVENTO = {
   planejamento: { nome: 'Planejamento', tag: '' },
   montagem: { nome: 'Montagem', tag: 'info' },

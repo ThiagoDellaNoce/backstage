@@ -55,3 +55,13 @@ td.dir { text-align: right; }
 .atencao { display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
 .atencao div { display: flex; gap: 8px; align-items: center; }
 .atencao .tag { min-width: 92px; text-align: center; }
+
+/* Cartões de evento */
+.filtros { display: flex; flex-wrap: wrap; gap: 8px; }
+.filtros input { flex: 1 1 260px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.card { display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: var(--text); }
+a.card:hover { border-color: var(--primary); color: var(--text); }
+.card .topo { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.card .selos { display: flex; gap: 6px; flex-wrap: wrap; }
+.card.apagado { opacity: .65; }
