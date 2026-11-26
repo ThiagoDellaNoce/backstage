@@ -102,9 +102,14 @@ Arquivo do protótipo: `prototipo/EventoGeral.html`
 
 **Quem pode:** Equipe do evento e gestor/planejamento. Membros podem mudar status e dados.
 
+**Na versão real (26/11/2026):**
+- Sem Pago e Saldo (pagamentos fora do MVP). “Documentos aprovados” só aparece com a Documentação ligada.
+- “Próximos 3 dias” = hoje até hoje+2: cronograma por fase + marcos (prazos de documento, passagem de som, show).
+- “+ Adicionar” e “×” da equipe só para gestor/planejamento, até a pendência 9 (permissões) ser decidida; o banco ainda deixa membros.
+- “Editar evento” aparece desabilitado até a tela ser desenhada.
+
 **Pendências:**
-- Pago e Saldo dependem de pagamentos.
-- “Próximos 3 dias” traz um pagamento de exemplo (“Pagamento sinal palco”).
+- Tela Editar evento (dados + checklist de telas).
 
 ## 5. Evento · Planilha de trabalho
 Arquivo do protótipo: `prototipo/Planilha.html`

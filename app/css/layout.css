@@ -115,3 +115,34 @@ a.card:hover { border-color: var(--primary); color: var(--text); }
 .btn-x:hover { color: var(--danger); }
 .resumo dt { color: var(--muted-2); font-size: 12px; }
 .resumo dd { margin: 2px 0 12px; }
+
+/* Submenu do evento e abas */
+.side a.par { color: var(--text); font-weight: 600; }
+.side .sub { display: flex; flex-direction: column; gap: 2px; margin: 2px 0 6px 12px; padding-left: 8px; border-left: 1px solid var(--border-strong); }
+.side .sub .ev { font-size: 12px; color: var(--muted); padding: 6px 12px 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.side .sub a, .side .sub .item-off { padding: 8px 12px; font-size: 13px; }
+.side .sub .breve, .abas .breve { display: none; }
+
+.abas { display: flex; flex-wrap: wrap; gap: 4px; border-bottom: 1px solid var(--border); }
+.abas a, .abas .item-off {
+  display: flex; align-items: center; gap: 8px; padding: 10px 14px; white-space: nowrap;
+  color: var(--muted-2); text-decoration: none; font-size: 14px; border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.abas a:hover { color: var(--text); }
+.abas a.on { color: var(--text); border-bottom-color: var(--secondary); font-weight: 600; }
+.abas .item-off { color: var(--muted); cursor: default; }
+
+/* Visão geral */
+.cabecalho { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: flex-end; }
+.cabecalho .lado { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.cabecalho select.status { border-color: var(--primary); background: var(--active-bg); }
+.linha2 { display: flex; flex-wrap: wrap; gap: 16px; }
+.linha2 > * { flex: 1 1 320px; min-width: 0; }
+dl.ficha { display: grid; grid-template-columns: max-content 1fr; gap: 8px 16px; margin: 0; font-size: 14px; }
+dl.ficha dt { color: var(--muted-2); }
+dl.ficha dd { margin: 0; }
+hr.div { border: 0; border-top: 1px solid var(--border); margin: 16px 0; }
+.tempo { display: flex; flex-direction: column; gap: 10px; font-size: 13px; }
+.tempo .dia { display: flex; gap: 10px; align-items: baseline; }
+.tempo .dia .tag { min-width: 44px; text-align: center; }
+.tempo ul { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 4px; }

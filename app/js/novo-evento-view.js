@@ -23,6 +23,10 @@ export function validarDados(d) {
   const e = {};
   if (!d.nome.trim()) e.nome = 'Dê um nome ao evento.';
   if (!d.data_evento) e.data_evento = 'Informe a data do evento (dia 0).';
+  else {
+    const ano = +d.data_evento.slice(0, 4), agora = new Date().getFullYear();
+    if (ano < agora - 1 || ano > agora + 5) e.data_evento = `Confira o ano (${ano}).`;
+  }
   if (d.data_fim && d.data_evento && d.data_fim < d.data_evento) e.data_fim = 'O término não pode ser antes do início.';
   if (d.publico_estimado !== '' && !/^\d+$/.test(String(d.publico_estimado).replace(/\./g, ''))) e.publico_estimado = 'Use só números.';
   return e;

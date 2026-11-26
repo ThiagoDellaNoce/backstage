@@ -67,13 +67,12 @@ function cartao(e, docs, h) {
   const s = STATUS_EVENTO[e.status];
   const onde = [e.local, e.cidade].filter(Boolean).join(', ');
   const selos = selosDocumentos(e, docs, h);
-  // Visão geral ainda não existe: o cartão vira link quando ela ficar pronta
-  return `<div class="box card${['encerrado', 'cancelado'].includes(e.status) ? ' apagado' : ''}" title="Visão geral do evento: em breve">
+  return `<a class="box card${['encerrado', 'cancelado'].includes(e.status) ? ' apagado' : ''}" href="evento.html?id=${e.id}">
     <div class="topo"><b>${esc(e.nome)}</b><span class="tag ${s.tag}">${s.nome}</span></div>
     <div class="muted">${dataEvento(e)}${onde ? ` · ${esc(onde)}` : ''} · ${faltamHtml(e, h)}</div>
     ${e.contratante ? `<div class="muted">Contratante: ${esc(e.contratante)}</div>` : ''}
     ${selos.length ? `<div class="selos">${selos.map((x) => `<span class="tag ${x.tag}">${x.texto}</span>`).join('')}</div>` : ''}
-  </div>`;
+  </a>`;
 }
 
 /** Monta a tela. `dados` = { eventos, documentos }. */
