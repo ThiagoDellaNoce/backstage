@@ -5,6 +5,7 @@ import { esc } from './util.js';
  * Abre uma janela. `montar(corpo, fechar)` preenche o conteúdo.
  * Devolve uma Promise que resolve com o valor passado a fechar(valor).
  */
+
 export function abrirJanela({ titulo, rodape = '' }, montar) {
   return new Promise((resolve) => {
     const d = document.createElement('dialog');
